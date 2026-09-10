@@ -111,7 +111,7 @@ export function formatStats(usage, share = false) {
   const rows = [
     ['Input tokens', usage.inputTokens],
     ['Output tokens (including reasoning)', usage.outputTokens],
-    ['Non-reasoning output tokens (prose + tools)', usage.visibleOutputTokens],
+    ['Non-reasoning output tokens (assistant text + tool calls)', usage.visibleOutputTokens],
     ['Reasoning tokens', usage.reasoningOutputTokens],
     ['Cache-read tokens (part of input)', usage.cacheReadTokens],
   ];

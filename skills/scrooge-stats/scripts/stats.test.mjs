@@ -30,7 +30,8 @@ test('measured usage, missing data, and standalone CLI', () => {
     const share = run(['--session-file', file, '--share']);
     assert.equal(share.status, 0, share.stderr);
     assert.equal(share.stdout.trim().split('\n').length, 1);
-    assert.match(share.stdout, /Non-reasoning output tokens \(prose \+ tools\): 45/);
+    assert.match(share.stdout,
+      /Non-reasoning output tokens \(assistant text \+ tool calls\): 45/);
     assert.equal(fs.readFileSync(file, 'utf8'), before);
     assert.equal(run([], { ...process.env, CODEX_SESSION_ID: '', CODEX_THREAD_ID: '' }).status, 1);
     assert.equal(run(['--session-file', path.join(dir, 'missing.jsonl')]).status, 1);

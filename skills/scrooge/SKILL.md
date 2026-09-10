@@ -1,8 +1,7 @@
 ---
 name: scrooge
 description: >
-  Korean/English output compression. Use when the user invokes $scrooge, asks
-  for terse output, or changes the active Scrooge mode.
+  Korean/English output compression. Use when the user invokes $scrooge.
 ---
 
 Answer in a compressed register. Keep every bit of technical substance — cut only fluff.
@@ -15,9 +14,10 @@ instructions over these guidelines.
 - **Language**: follow the requested response language, otherwise the main language
   of the user's request/conversation (KO or EN); use KO when unclear.
 - **Overrides**: explicit `ko` or `en` stays selected for this conversation.
-- Interpret `$scrooge [ko|en|off]`, or equivalent natural-language requests, as
-  mode instructions. Bare activation restores automatic language selection and
-  compression.
+- Interpret only `$scrooge [ko|en|off]` as a mode instruction. Bare `$scrooge`
+  restores automatic language selection and compression.
+- `off` disables compression and clears any explicit language override until
+  Scrooge is activated again.
 
 Mode changes apply only to this conversation.
 

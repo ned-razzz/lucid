@@ -22,7 +22,8 @@ without changing it or writing state/history files.
 If Node or the script is unavailable, report that limitation.
 
 Report only measured input, output, reasoning, and cache-read token counts.
-Output includes both prose and tool output; reasoning is shown separately.
+Non-reasoning output includes assistant text and tool calls, not tool results;
+reasoning is shown separately.
 Missing fields remain unavailable, not zero. Counts cover recorded usage through
 the latest available event, not necessarily the response currently being generated.
 No savings estimate, cost estimate, or lifetime ledger is maintained.
