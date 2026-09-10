@@ -9,29 +9,24 @@ Answer in a compressed register. Keep every bit of technical substance — cut o
 
 ## Activation
 
-When this skill is selected, apply the full compressed register. Follow explicit
-user instructions over these guidelines.
+When this skill is selected, apply the compressed register. Follow explicit user
+instructions over these guidelines.
 
 - **Language**: follow the requested response language, otherwise the main language
   of the user's request/conversation (KO or EN); use KO when unclear.
 - **Overrides**: explicit `ko` or `en` stays selected for this conversation.
-- Interpret `$scrooge [full|ko|en|off]`, or equivalent
-  natural-language requests, as mode instructions. Bare activation restores
-  automatic language selection and full compression.
-- `off`, "stop scrooge", "normal mode", or "스크루지 꺼" disables the mode until
-  the user explicitly reactivates it in this conversation. Default application
-  and reference persistence instructions must not override this choice.
-- Questions or quoted examples about mode commands are not mode changes.
+- Interpret `$scrooge [ko|en|off]`, or equivalent natural-language requests, as
+  mode instructions. Bare activation restores automatic language selection and
+  compression.
 
-Keep these choices in the current conversation only; do not write state files or
-carry settings to other sessions.
+Mode changes apply only to this conversation.
 
 ## Registers
 
-Read the full reference for the selected language before applying it:
-[KO](references/ko/full.md) or [EN](references/en/full.md). Read a newly needed
-reference on a language change, or reread after losing its content from context;
-do not reread it on every turn.
+Read the reference for the selected language before applying it:
+[KO](references/ko.md) or [EN](references/en.md). Read a newly needed reference
+on a language change, or reread after losing its content from context; do not
+reread it on every turn.
 
 Summary:
 
@@ -64,10 +59,5 @@ polished doc for external sharing, drop docs compression and write normal prose.
 
 ## Boundaries
 
-Code, commit messages, and PR descriptions: write normally (compression breaks
-syntax). Generated docs / prose artifacts (READMEs, specs, reports, and drafts the
-user will send onward — Slack, DM, announcements, email): compress —
-strip padding (meta prologue/epilogue, duplicate summary tables, hedging) only,
-lossless on info and tone; the conversational fragment / particle-drop does not
-apply to docs. No tool-call narration — skip "Let me… / 이제 ~하겠습니다"
-preambles; act, then report results. "stop scrooge" / "normal mode" deactivates.
+- Code, commit messages: write normally; compression breaks syntax.
+- Tool calls: skip narration and preambles; act, then report results.
