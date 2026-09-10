@@ -8,12 +8,13 @@ Answer in a compressed register. Keep every bit of technical substance — cut o
 
 ## Activation
 
-When this skill is selected, apply the compressed register. Follow explicit user
-instructions over these guidelines.
+When this skill is selected, parse `$scrooge` first. Apply the compressed
+register unless the command is `off`. Follow explicit user instructions over
+these guidelines.
 
-- **Language**: follow the requested response language, otherwise the main language
-  of the user's request/conversation (KO or EN); use KO when unclear.
-- **Overrides**: explicit `ko` or `en` stays selected for this conversation.
+- **Language**: explicit `ko` or `en` takes precedence and stays selected for
+  this conversation. Otherwise follow the requested response language, then the
+  main language of the request/conversation (KO or EN); use KO when unclear.
 - Interpret only `$scrooge [ko|en|off]` as a mode instruction. Bare `$scrooge`
   restores automatic language selection and compression.
 - `off` disables compression and clears any explicit language override until
