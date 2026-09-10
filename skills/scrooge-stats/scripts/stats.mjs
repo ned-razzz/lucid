@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
@@ -62,6 +63,49 @@ export function parseCodexSession(filePath) {
   };
 }
 
+function matchesSession(filePath, sessionId) {
+  if (path.basename(filePath, '.jsonl').endsWith(sessionId)) return true;
+  let fd;
+  try {
+    fd = fs.openSync(filePath, 'r');
+    const buffer = Buffer.alloc(65536);
+    const length = fs.readSync(fd, buffer, 0, buffer.length, 0);
+    const firstLine = buffer.subarray(0, length).toString('utf8').split('\n', 1)[0];
+    const meta = JSON.parse(firstLine);
+    return meta?.type === 'session_meta'
+      && (meta.payload?.id === sessionId || meta.payload?.session_id === sessionId);
+  } catch {
+    return false;
+  } finally {
+    if (fd !== undefined) fs.closeSync(fd);
+  }
+}
+
+export function findCodexSession(sessionId, codexHome = process.env.CODEX_HOME) {
+  if (!sessionId) return null;
+  const root = path.join(codexHome || path.join(os.homedir(), '.codex'), 'sessions');
+  const pending = [root];
+  while (pending.length) {
+    const directory = pending.pop();
+    let entries;
+    try {
+      entries = fs.readdirSync(directory, { withFileTypes: true });
+    } catch {
+      continue;
+    }
+    for (const entry of entries) {
+      const filePath = path.join(directory, entry.name);
+      if (entry.isDirectory()) {
+        pending.push(filePath);
+      } else if (entry.isFile() && entry.name.endsWith('.jsonl')
+        && matchesSession(filePath, sessionId)) {
+        return filePath;
+      }
+    }
+  }
+  return null;
+}
+
 export function formatStats(usage, share = false) {
   const number = value => value === null ? 'unavailable' : value.toLocaleString('en-US');
   const rows = [
@@ -82,10 +126,19 @@ function main() {
       'session-file': { type: 'string' },
       share: { type: 'boolean', default: false },
     } });
-    if (!values['session-file'] || values['session-file'].startsWith('--')) {
-      throw new Error('Usage: node stats.mjs --session-file <session.jsonl> [--share]');
+    const explicit = values['session-file'];
+    if (explicit?.startsWith('--')) {
+      throw new Error('Usage: node stats.mjs [--session-file <session.jsonl>] [--share]');
     }
-    process.stdout.write(formatStats(parseCodexSession(values['session-file']), values.share));
+    const sessionFile = explicit || findCodexSession(
+      process.env.CODEX_SESSION_ID || process.env.CODEX_THREAD_ID
+    );
+    if (!sessionFile) {
+      throw new Error(
+        'Current Codex session log not found; pass --session-file <session.jsonl>.'
+      );
+    }
+    process.stdout.write(formatStats(parseCodexSession(sessionFile), values.share));
   } catch (error) {
     process.stderr.write(`Scrooge Stats: ${error.message}\n`);
     process.exitCode = 1;

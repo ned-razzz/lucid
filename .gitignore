@@ -1,11 +1,3 @@
-# --- Claude Code dev tooling (private; not part of the published product) ---
-# Planning docs (specs, initiatives), injected shared rules/hooks/commands
-# (symlinks into private ai-config), local settings. The shipped product lives
-# under skills/.
-.claude/
-CLAUDE.local.md
-AGENTS.local.md
-
 # Codex effort wrapper / local codex config injected by ai-config (dev-only)
 .codex/config.toml.lock.d/
 

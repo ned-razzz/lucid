@@ -8,13 +8,14 @@ description: >
 Run the bundled script with Node.js (18.3 or newer) and show its output verbatim:
 
 ```text
-node "<skill directory>/scripts/stats.mjs" --session-file "<session JSONL path>" [--share]
+node "<skill directory>/scripts/stats.mjs" [--session-file "<session JSONL path>"] [--share]
 ```
 
 Resolve the script relative to this SKILL.md, not the working directory.
-Use a verified current-session path or the session file the user explicitly
-selects. If the path is unavailable, ask for it; never substitute the most recently
-modified session. Do not dump conversation contents to locate usage.
+Without `--session-file`, the script resolves the current Codex session using its
+environment-provided session ID. If that is unavailable or has no matching local
+log, ask for an explicit path; never substitute the most recently modified session.
+Do not dump conversation contents to locate usage.
 
 `--share` prints a one-line usage summary. The script reads the selected log
 without changing it or writing state/history files.

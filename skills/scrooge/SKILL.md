@@ -1,18 +1,16 @@
 ---
 name: scrooge
 description: >
-  Default Korean/English output compression and minimal-code guidance for every
-  conversation and session. Apply to all tasks unless the user has disabled
-  Scrooge in this conversation; also use for $scrooge and mode changes.
+  Korean/English output compression and minimal-code guidance. Use when the user
+  invokes $scrooge, asks for terse output, or changes the active Scrooge mode.
 ---
 
 Answer in a compressed register. Keep every bit of technical substance — cut only fluff.
 
 ## Activation
 
-Apply by default at full intensity with lean enabled. Follow explicit user
-instructions over these guidelines. These are conversational instructions, not
-a startup hook or a guarantee of automatic loading.
+When this skill is selected, apply full intensity with lean enabled. Follow
+explicit user instructions over these guidelines.
 
 - **Language**: follow the requested response language, otherwise the main language
   of the user's request/conversation (KO or EN); use KO when unclear.
@@ -46,7 +44,7 @@ Summary:
 | EN · full | Drop articles / filler / pleasantries. Fragments OK, short synonyms. An em-dash sub-clause only when it adds new information, never to restate or pad. |
 | KO · full | 개조식 + 음슴체 (~함/~됨), 의미 명확 시 조사 드롭, 존대 제거, pro-drop. |
 
-All dials: code blocks, error strings, and technical terms (props, ref, hook,
+All dials: code blocks, error strings, and technical terms (props, ref,
 DB, auth) stay verbatim. **Clarity over compression — always wins.** Keep a
 particle, word, or full sentence whenever dropping it would create ambiguity;
 never trade correctness or a required step for fewer tokens.
