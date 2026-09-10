@@ -1,24 +1,23 @@
 ---
 name: scrooge
 description: >
-  Korean/English output compression and minimal-code guidance. Use when the user
-  invokes $scrooge, asks for terse output, or changes the active Scrooge mode.
+  Korean/English output compression. Use when the user invokes $scrooge, asks
+  for terse output, or changes the active Scrooge mode.
 ---
 
 Answer in a compressed register. Keep every bit of technical substance — cut only fluff.
 
 ## Activation
 
-When this skill is selected, apply full intensity with lean enabled. Follow
-explicit user instructions over these guidelines.
+When this skill is selected, apply the full compressed register. Follow explicit
+user instructions over these guidelines.
 
 - **Language**: follow the requested response language, otherwise the main language
   of the user's request/conversation (KO or EN); use KO when unclear.
 - **Overrides**: explicit `ko` or `en` stays selected for this conversation.
-- **Flag**: `lean` enables minimal-code guidance; `nolean` disables it.
-- Interpret `$scrooge [full|ko|en|lean|nolean|off]`, or equivalent
+- Interpret `$scrooge [full|ko|en|off]`, or equivalent
   natural-language requests, as mode instructions. Bare activation restores
-  automatic language selection, full intensity, and lean.
+  automatic language selection and full compression.
 - `off`, "stop scrooge", "normal mode", or "스크루지 꺼" disables the mode until
   the user explicitly reactivates it in this conversation. Default application
   and reference persistence instructions must not override this choice.
@@ -30,12 +29,9 @@ carry settings to other sessions.
 ## Registers
 
 Read the full reference for the selected language before applying it:
-[KO](references/ko/full.md) or [EN](references/en/full.md).
-With lean enabled, also read the matching
-[KO lean](references/ko/fragments/lean.md) or
-[EN lean](references/en/fragments/lean.md) for coding work.
-Read newly needed references on a language/flag change, or reread after losing
-their content from context; do not reread them on every turn.
+[KO](references/ko/full.md) or [EN](references/en/full.md). Read a newly needed
+reference on a language change, or reread after losing its content from context;
+do not reread it on every turn.
 
 Summary:
 
