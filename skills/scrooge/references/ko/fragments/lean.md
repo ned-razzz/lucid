@@ -1,5 +1,4 @@
 <!-- Scrooge flag fragment — lang: ko / flag: lean -->
-<!-- Appended to the base register when the `lean` flag is active. Mapped in registry.json["fragments"]["ko"]["lean"]. -->
 
 ## Flag: lean — 코드 산출물 최소주의
 

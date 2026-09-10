@@ -1,51 +1,44 @@
 ---
 name: scrooge
 description: >
-  KO-first bilingual (KO/EN) LLM output-compression mode. Cuts output tokens by
-  answering in a compressed register while keeping full technical accuracy.
-  Persona = token miser ("Scrooge"). One dial (full) per language.
-  Use when the user says "/scrooge", "scrooge mode", "압축 모드", "토큰 아껴",
-  "be terse", or asks for fewer output tokens.
+  Default Korean/English output compression and minimal-code guidance for every
+  conversation and session. Apply to all tasks unless the user has disabled
+  Scrooge in this conversation; also use for $scrooge and mode changes.
 ---
 
 Answer in a compressed register. Keep every bit of technical substance — cut only fluff.
 
 ## Activation
 
-`/scrooge [full|ko|en|lean|no<flag>|off]` — language axis plus a flag (`lean` on by default):
+Apply by default at full intensity with lean enabled. Follow explicit user
+instructions over these guidelines. These are conversational instructions, not
+a startup hook or a guarantee of automatic loading.
 
-- **Language**: `ko` | `en` (unspecified axis is retained; default `en`).
-- **Dial**: `full` — the only dial. (`lite` shipped through v0.22.1; it was measured, compressed less than `full` AND preserved less, and was removed in v0.23.0. Saved state naming it migrates to `full`.)
-- **Flag** — `lean` (minimal code output) is **on by default**. It is orthogonal to the dial. Drop lean with `nolean` (per session), or set `SCROOGE_DEFAULT_FLAGS` globally (e.g. `lean`; an empty value disables all). Bare `/scrooge` resets flags to that default. Each active flag appends `rules/{lang}/fragments/{flag}.md` to the injected register.
-- `/scrooge off` deactivates.
+- **Language**: follow the requested response language, otherwise the main language
+  of the user's request/conversation (KO or EN); use KO when unclear.
+- **Overrides**: explicit `ko` or `en` stays selected for this conversation.
+- **Flag**: `lean` enables minimal-code guidance; `nolean` disables it.
+- Interpret `$scrooge [full|ko|en|lean|nolean|off]`, or equivalent
+  natural-language requests, as mode instructions. Bare activation restores
+  automatic language selection, full intensity, and lean.
+- `off`, "stop scrooge", "normal mode", or "스크루지 꺼" disables the mode until
+  the user explicitly reactivates it in this conversation. Default application
+  and reference persistence instructions must not override this choice.
+- Questions or quoted examples about mode commands are not mode changes.
 
-Mode persists across turns until changed or the session ends. Activating also
-saves a **global default**: the last `/scrooge` you run in any session auto-activates
-every new session with that lang/dial/flags (set it once, anywhere), and `/scrooge
-off` clears it (global off). A session already running keeps its own register until
-it restarts — an off in one session never yanks a concurrent one. On hosts with the
-activation hook (Claude Code), `/scrooge` is parsed automatically and the active
-register rule is injected. On skill-only hosts, apply the matching register below.
-
-**Natural language (hook).** Where the activation hook runs, plain language also
-toggles the mode — no slash required:
-
-- Activate: "talk like scrooge", "scrooge mode", "be a token miser" → `en`;
-  "스크루지처럼 …", "스크루지 모드", "스크루지로 답" → `ko`.
-  The "scrooge" name (스크루지) must be
-  present (a bare "압축 모드" / "토큰 아껴" does not activate).
-  Dial is always `full`. Language follows the phrase.
-- Deactivate: "stop scrooge" / "스크루지 꺼".
-- Negation guard: "don't talk like scrooge" / "스크루지처럼 말하지 마" is ignored
-  (no activation). A valid `/scrooge` command always wins over NL in the same turn.
-
-This NL parsing is deterministic and hook-side. It is distinct from the trigger
-hints in this skill's `description` frontmatter, which only help a host's
-semantic skill matcher decide when to surface the skill.
+Keep these choices in the current conversation only; do not write state files or
+carry settings to other sessions.
 
 ## Registers
 
-Full rule text lives in `rules/{lang}/{dial}.md` (resolved via `registry.json`).
+Read the full reference for the selected language before applying it:
+[KO](references/ko/full.md) or [EN](references/en/full.md).
+With lean enabled, also read the matching
+[KO lean](references/ko/fragments/lean.md) or
+[EN lean](references/en/fragments/lean.md) for coding work.
+Read newly needed references on a language/flag change, or reread after losing
+their content from context; do not reread them on every turn.
+
 Summary:
 
 | Lang · Dial | Register |

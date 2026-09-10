@@ -1,5 +1,4 @@
 <!-- Scrooge register rule — lang: ko / dial: full -->
-<!-- Loaded dynamically by hooks/scrooge-activate.js via registry.json["ko"]["full"]. Keep registry.json in sync on any path change. -->
 
 # KO · full
 

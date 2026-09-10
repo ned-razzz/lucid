@@ -60,7 +60,7 @@ flowchart LR
 1. `prompts.jsonl`에 실제 사용하는 작업 20~50개를 둔다. 각 행은 `id`, `prompt`, `kind`만 가진다.
 2. prompt마다 baseline과 candidate를 서로 다른 임시 작업 디렉터리 및 임시 `CODEX_HOME`에서 실행한다. baseline에는 대상 스킬/훅을 두지 않고, candidate에만 둔다. 두 arm은 같은 Codex 모델·권한·작업 복사본을 사용한다.
 3. `codex exec --json`으로 이벤트를 JSONL로 저장하고 `--output-last-message`로 최종 답변도 저장한다. 읽기 전용 작업은 `--sandbox read-only`, 코드 작업은 매 arm마다 새 fixture 복사본에서 `workspace-write`를 사용한다.
-4. 현재 Codex 세션 로그의 `token_count` 이벤트에서 누적 token usage를 읽는다. 이 저장 형식은 CLI 버전에 따라 바뀔 수 있으므로, runner는 한 번의 샘플을 검증하고 모르는 event schema면 실패해야 한다. `lib/session-log.js`의 `parseCodexSession`이 이미 이 형식의 누적값과 reasoning 토큰 제외 원칙을 구현한다.
+4. 현재 Codex 세션 로그의 `token_count` 이벤트에서 누적 token usage를 읽는다. 이 저장 형식은 CLI 버전에 따라 바뀔 수 있으므로, runner는 한 번의 샘플을 검증하고 모르는 event schema면 실패해야 한다. `skills/scrooge-stats/scripts/stats.mjs`의 `parseCodexSession`이 이미 이 형식의 누적값과 reasoning 토큰 제외 원칙을 구현한다.
 5. 결과를 `id`, `arm`, `run`, `model`, `visible_output_tokens`, `final_text`, `error`만 담은 JSONL로 저장한다. 동일 `id/run`끼리만 `(baseline - candidate) / baseline`을 계산하고 중앙값을 출력한다.
 6. 품질은 먼저 코드/URL/안전 경고의 결정적 검사만 둔다. 의미 동등성이 필요해질 때만 별도 Codex 평가 호출을 추가하고, `codex exec --output-schema`로 `equivalent`, `missing_claims`, `score` JSON을 강제한다. 평가 실패는 통과가 아니라 보류다.
 
