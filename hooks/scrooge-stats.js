@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // scrooge-stats.js — read the active host-agent session log, print real output
-// token usage plus (when benchmark data exists) an estimated savings figure.
+// token usage plus an estimated savings figure.
 //
 // Run directly:    node hooks/scrooge-stats.js
 // Inside Claude:   /scrooge-stats is intercepted by scrooge-activate.js, which
@@ -9,10 +9,8 @@
 //
 // Honesty: token counts are MEASURED from the session JSONL `usage` fields.
 // Savings are a COUNTERFACTUAL ESTIMATE (what the same turns would have cost
-// uncompressed), always labelled "(est)". Per-dial ratios come from the
-// subscription benchmark, carried per language in lang-meta.js (LANG_META.savings)
-// and read here via savingsMeta(); a language with no published ratio shows raw
-// tokens only — never a fabricated number.
+// uncompressed), always labelled "(est)". Per-dial fixed ratios live in
+// lang-meta.js; a language with no ratio shows raw tokens only.
 
 import path from 'node:path';
 import os from 'node:os';
@@ -29,17 +27,8 @@ import { upsertSession, aggregateLedger, sinceToEpoch, getHistoryPath } from '..
 import { resolveRepoRoot, assembleRuleBody, buildFullInjection } from './scrooge-activate.js';
 import { savingsMeta, buildReminder } from './lang-meta.js';
 
-// Per-(lang, dial) mean output-token compression ratios now live in lang-meta.js
-// (LANG_META[lang].savings), one row per language alongside the rest of that
-// language's metadata, each with its provenance (results file(s), N, model). This
-// hook reads them through savingsMeta().
-//
-// `full` is the only dial. `lite` shipped through v0.22.1 carrying no ratio
-// because its measurement rejected it (lite-dial-verification, 2026-07-20: ko/lite
-// +43.8% at fidelity 0.650 and en/lite +60.3% at 0.700, against ko/full 0.690 and
-// en/full 0.720 — less compression AND less preservation). v0.23.0 finished that
-// decision and removed the dial. Register-only isolation means real sessions may
-// differ from the benchmark — hence the "(est)" label on every derived figure.
+// Register-only isolation means real sessions may differ from the fixed ratio, so
+// every derived figure remains an estimate.
 
 const SEP = '──────────────────────────────';
 
@@ -51,7 +40,7 @@ function humanizeTokens(n) {
 }
 
 // Counterfactual estimate for one (lang, dial), or null when that pair carries no
-// published ratio — any language not yet benchmarked.
+// fixed ratio — any language without one returns no estimate.
 // The ratio is a prose-register figure, so it is applied to prose output tokens
 // only — tool_use output (bash/edit/tool JSON) is not compressed by the register
 // and must stay out of the savings base (ADR-003).
@@ -177,12 +166,12 @@ function formatStats({
     savings =
       `Est. without scrooge:  ${est.estNormal.toLocaleString()} (prose-only basis)\n` +
       `Est. tokens saved:     ${est.saved.toLocaleString()} (~${est.pct}%, est)`;
-    footer = `Estimate from benchmarks/ (mean per-dial, ${modeLabel}); applied to prose output only — tool_use output excluded. Savings are counterfactual.`;
+    footer = `Fixed ratio for ${modeLabel}; applied to prose output only — tool_use output excluded. Savings are counterfactual.`;
   } else {
     savings =
-      `No savings estimate published for '${state.lang}/${state.dial}'.\n` +
-      'That language has no benchmark run yet.\n' +
-      'Measured output tokens shown above; no estimate fabricated.';
+      `No savings estimate configured for '${state.lang}/${state.dial}'.\n` +
+      'Measured output tokens shown above; no estimate configured.\n' +
+      'No estimate fabricated.';
   }
 
   // Self-injection overhead nets against this session's savings: Scrooge adds its

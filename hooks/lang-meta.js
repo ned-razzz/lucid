@@ -17,23 +17,7 @@
 //   reminder: pieces the per-turn reminder is assembled from (see buildReminder).
 //   countermand: the off-turn "return to normal prose" line.
 //   flagHint: compact per-flag behavior label map (mirrors each fragment heading).
-//   savings: measured per-dial output-token compression ratio + its provenance,
-//          moved here from the former scrooge-stats.js SAVINGS_RATIO constant so a
-//          benchmarked language lives in ONE row (ratio included), not a second
-//          parallel table. Per dial: { ratio, results, n, model } — `results` is the
-//          backing benchmark file(s), `n` the sample size, `model` the measured model.
-//          Every row is derived from a file under benchmarks/published/, so anyone can
-//          recompute the ratio: `report.py --input <results> --paired`, then
-//          1 − median(scrooge)/median(normal), rounded to 2 decimals. That published
-//          derivation is the single source these ratios and the README tables share;
-//          tests/test_doc_parity.js asserts the two still agree. (Before this, the
-//          ratios were carried forward from an older opus-4-7 run, ko pointed at a
-//          file that does not exist, and hi/zh were transposed.) `lite` is absent
-//          on purpose and is NOT unmeasured: lite-dial-verification (2026-07-20)
-//          measured it and returned NO-GO — lite compresses less than full AND
-//          preserves less (ko 0.650 vs full 0.690; en 0.700 vs 0.720), a Pareto
-//          loss — so decision D2 option A keeps the dial shipped with no ratio on
-//          the product surface, and deriveEstimate returns null for it.
+//   savings: fixed per-dial ratio used only for a counterfactual stats estimate.
 //   nlCue: natural-language activation cues (see parseNaturalActivation in
 //          nl-activation.js). Each is the language's slice of the original combined
 //          regex; `name`/`meta`/`strong`/`off`/`activate`/`negate` test independently
@@ -51,9 +35,7 @@ export const LANG_META = {
     },
     countermand: 'SCROOGE OFF — 압축 모드 해제. 이번 턴부터 평소 register(일반 문체)로 복귀.',
     flagHint: { lean: 'lean(최소 코드)' },
-    savings: {
-      full: { ratio: 0.69, results: ['benchmarks/published/results-ko-clean-opus48.jsonl'], n: 21, model: 'claude-opus-4-8' },
-    },
+    savings: { full: { ratio: 0.69 } },
     nlCue: {
       name: /스크루지/,
       // Activation triggers: the "scrooge" name plus an explicit action cue. The bare
@@ -78,9 +60,7 @@ export const LANG_META = {
     },
     countermand: 'SCROOGE OFF — compression mode deactivated. Return to your normal register from this turn on.',
     flagHint: { lean: 'lean (minimal code)' },
-    savings: {
-      full: { ratio: 0.67, results: ['benchmarks/published/results-en-clean-opus48.jsonl'], n: 24, model: 'claude-opus-4-8' },
-    },
+    savings: { full: { ratio: 0.67 } },
     nlCue: {
       name: /scrooge/i,
       // The "be a token miser" persona stays on the EN side because it names Scrooge
@@ -104,13 +84,7 @@ export const LANG_META = {
     },
     countermand: 'SCROOGE OFF — 圧縮モード解除。今ターンから通常の register（通常文体）に復帰。',
     flagHint: { lean: 'lean（最小コード）' },
-    savings: {
-      // Held-out corpus only (integrity-sweep Task 5). The old 0.63 averaged an
-      // N=15 tuning run with the held-out one; that tuning corpus is gitignored,
-      // so nobody could recompute the average — the README table it backed was
-      // dropped for the same reason.
-      full: { ratio: 0.65, results: ['benchmarks/published/results-ja-report.jsonl'], n: 10, model: 'claude-opus-4-8' },
-    },
+    savings: { full: { ratio: 0.65 } },
     nlCue: {
       name: /スクルージ/,
       // Japanese has no inter-word spaces, so `\b` is inert — the trigger anchors on
@@ -132,9 +106,7 @@ export const LANG_META = {
     },
     countermand: 'SCROOGE OFF — संपीड़न मोड बंद। इस turn से सामान्य register (सामान्य शैली) में वापस।',
     flagHint: { lean: 'lean (न्यूनतम कोड)' },
-    savings: {
-      full: { ratio: 0.63, results: ['benchmarks/published/results-hi-report.jsonl'], n: 11, model: 'claude-opus-4-8' },
-    },
+    savings: { full: { ratio: 0.63 } },
     nlCue: {
       name: /स्क्रूज/,
       // Devanagari has spaces, but JS `\b` is ASCII-only and inert on it — the trigger
@@ -159,9 +131,7 @@ export const LANG_META = {
     },
     countermand: 'SCROOGE OFF — 压缩模式解除。本回合起回到日常 register(常规文体)。',
     flagHint: { lean: 'lean(最小代码)' },
-    savings: {
-      full: { ratio: 0.67, results: ['benchmarks/published/results-zh-report.jsonl'], n: 11, model: 'claude-opus-4-8' },
-    },
+    savings: { full: { ratio: 0.67 } },
     nlCue: {
       name: /斯克鲁奇/,
       // Chinese has no inter-word spaces, so JS `\b` is inert — the trigger anchors on
@@ -194,10 +164,7 @@ export function metaLangs() {
   return Object.keys(LANG_META);
 }
 
-// Measured savings entry { ratio, results, n, model } for a (lang, dial), or null
-// when the pair has no benchmark (any lite dial today, or a lang with no savings row).
-// deriveEstimate reads `.ratio` from this; the doc-parity provenance guard reads the
-// whole entry. Replaces the removed scrooge-stats.js SAVINGS_RATIO constant.
+// Fixed savings entry { ratio } for a (lang, dial), or null when absent.
 export function savingsMeta(lang, dial) {
   const s = LANG_META[lang] && LANG_META[lang].savings;
   return (s && s[dial]) || null;

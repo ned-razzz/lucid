@@ -75,13 +75,8 @@ export function migrateDial(dial) {
 // Behavior/input flags, orthogonal to dial. Whitelist-only: any token outside
 // this set is dropped (never persisted, never injected). `lean` is the lone flag.
 export const VALID_FLAGS = ['lean'];
-// `lean` is ON by default — it cuts bloat (over-engineering, alternative-narration),
-// never correctness (its fragment pins the safety floor). Measured on top of `full`,
-// paired against the same register without the flag: KO +34.6% (n=22) / EN +10.3%
-// (n=21), est, prose-only, claude-opus-4-8. The per-language figures differ by 24pp,
-// so this comment carries both rather than an average that fits neither.
-// Reproduce: benchmarks/report.py --input results-lean2-{ko,en}.jsonl
-//            --baseline scrooge:{ko,en}/full --paired
+// `lean` is ON by default — it cuts bloat (over-engineering, alternative-narration)
+// without changing the safety floor defined by its fragment.
 // Opt out with `nolean` / SCROOGE_DEFAULT_FLAGS.
 export const DEFAULT_ON_FLAGS = ['lean'];
 export const DEFAULT_STATE = { lang: 'en', dial: 'full', flags: [...DEFAULT_ON_FLAGS] };

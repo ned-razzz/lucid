@@ -97,3 +97,5 @@ if [ "${SCROOGE_NO_UPDATE_CHECK:-0}" != "1" ] && [ -f "$UPDATE_FILE" ] && [ ! -L
     [ -n "$LATEST" ] && printf ' \033[38;5;172m↑v%s\033[0m' "$LATEST"
   fi
 fi
+
+exit 0

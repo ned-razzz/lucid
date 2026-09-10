@@ -14,7 +14,7 @@ node "${CLAUDE_PLUGIN_ROOT:-.}/hooks/scrooge-stats.js"
 ```
 
 Append `--share` for a one-line summary. Report only what the script prints
-(measured output tokens, plus a benchmark-based "(est)" savings figure when
+(measured output tokens, plus a fixed-ratio "(est)" savings figure when
 available) — do not recompute or estimate tokens yourself. If the script is not
 found (a host without the plugin files), say so rather than fabricating numbers.
 
