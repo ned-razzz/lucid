@@ -5,30 +5,12 @@
   "en": {
     "full": "rules/en/full.md"
   },
-  "ja": {
-    "full": "rules/ja/full.md"
-  },
-  "hi": {
-    "full": "rules/hi/full.md"
-  },
-  "zh": {
-    "full": "rules/zh/full.md"
-  },
   "fragments": {
     "ko": {
       "lean": "rules/ko/fragments/lean.md"
     },
     "en": {
       "lean": "rules/en/fragments/lean.md"
-    },
-    "ja": {
-      "lean": "rules/ja/fragments/lean.md"
-    },
-    "hi": {
-      "lean": "rules/hi/fragments/lean.md"
-    },
-    "zh": {
-      "lean": "rules/zh/fragments/lean.md"
     }
   }
 }

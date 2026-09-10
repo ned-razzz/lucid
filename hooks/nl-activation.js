@@ -55,13 +55,13 @@ export function parseNaturalActivation(prompt) {
   const negated = anyCue('negate');
 
   // Explicit deactivation — unless negated ("스크루지 끄지 마" / "don't turn off
-  // scrooge" / "スクルージやめないで"), where the user wants to KEEP the mode.
+  // scrooge"), where the user wants to KEEP the mode.
   if (anyCue('off')) {
     return negated ? null : { action: 'off' };
   }
 
   // Activation — first language (table order) whose activate cue matches. Suppressed
-  // by the negation guard ("스크루지처럼 말하지 마" / "スクルージみたいにしないで").
+  // by the negation guard ("스크루지처럼 말하지 마" / "don't talk like scrooge").
   for (const lang of langs) {
     if (LANG_META[lang].nlCue.activate.test(text)) {
       return negated ? null : { action: 'set', lang, dial: 'full' };

@@ -1,15 +1,15 @@
 // lang-meta.js — per-language activation/UI/NL metadata table + table-driven
-// dispatch helpers. The single home for everything that used to be a `ko`/`en`/`ja`
+// dispatch helpers. The single home for everything that used to be a `ko`/`en`
 // branch or regex pair scattered across scrooge-activate.js and nl-activation.js.
 //
 // Why a table: rule *loading* was already registry-driven (registry.json[lang][dial]),
 // but the activation surfaces — the per-turn reminder, the off countermand, the flag
 // hints, and the natural-language cues — were binary/ternary branches hardcoded to
-// ko/en/ja. Adding a 4th/5th language meant editing every branch. Here each language
+// ko/en. Adding another language meant editing every branch. Here each language
 // is ONE row of data; the dispatch helpers below are language-agnostic, so a new
 // language is a table row + a rule file + a registry entry, no hook surgery.
 //
-// Behavior contract: the ko/en/ja strings and regexes are moved VERBATIM from the
+// Behavior contract: the ko/en strings and regexes are moved VERBATIM from the
 // original hooks (no rewrite), so every reminder/countermand/NL output stays
 // byte-identical — the existing fixtures are the regression guard.
 
@@ -74,80 +74,6 @@ export const LANG_META = {
       strong: /\btalk\s+like\s+(?:a\s+)?scrooge\b|\bbe\s+(?:a\s+)?token\s+miser\b/i,
     },
   },
-  ja: {
-    reminder: {
-      head: 'SCROOGE 活性',
-      modeClose: '。 ',
-      full: '体言止め・常体、意味明確時は助詞ドロップ、敬語除去。',
-      suffix: ' code block・error・技術用語は原文。セキュリティ／取り消せない操作は normal prose。',
-      flag: { prefix: ' flag: ', sep: '・', suffix: ' 活性。' },
-    },
-    countermand: 'SCROOGE OFF — 圧縮モード解除。今ターンから通常の register（通常文体）に復帰。',
-    flagHint: { lean: 'lean（最小コード）' },
-    savings: { full: { ratio: 0.65 } },
-    nlCue: {
-      name: /スクルージ/,
-      // Japanese has no inter-word spaces, so `\b` is inert — the trigger anchors on
-      // explicit cue strings after the name (みたいに / モード / で答え…).
-      activate: /スクルージ\s*(?:みたいに|のように|っぽく|モード|で\s*(?:答|話|返答))/,
-      off: /スクルージ\s*(?:モード\s*)?(?:やめ|止め|停止|オフ|無効|切(?:っ|る)|off)/i,
-      negate: /しないで|ないで|するな|しなくて|せず/,
-      meta: /説明|ロジック|バグ|仕組み|どうやって|なぜ|どういう/,
-      strong: /スクルージ\s*(?:みたいに|のように|っぽく|で\s*(?:答|話|返答))/,
-    },
-  },
-  hi: {
-    reminder: {
-      head: 'SCROOGE सक्रिय',
-      modeClose: '। ',
-      full: 'संज्ञा-अंत·सामान्य शैली, अर्थ स्पष्ट होने पर परसर्ग ड्रॉप, आदरसूचक हटाना।',
-      suffix: ' code block·error·तकनीकी शब्द मूल रूप में। सुरक्षा/अपरिवर्तनीय ऑपरेशन normal prose।',
-      flag: { prefix: ' flag: ', sep: '·', suffix: ' सक्रिय।' },
-    },
-    countermand: 'SCROOGE OFF — संपीड़न मोड बंद। इस turn से सामान्य register (सामान्य शैली) में वापस।',
-    flagHint: { lean: 'lean (न्यूनतम कोड)' },
-    savings: { full: { ratio: 0.63 } },
-    nlCue: {
-      name: /स्क्रूज/,
-      // Devanagari has spaces, but JS `\b` is ASCII-only and inert on it — the trigger
-      // anchors on explicit cue strings after the name (की तरह / जैसे / मोड). Latin
-      // "scrooge" input is already caught by the en cue; the hi row owns Devanagari.
-      activate: /स्क्रूज\s*(?:की\s*तरह|जैसे|मोड)/,
-      off: /स्क्रूज\s*(?:मोड\s*)?(?:बंद|रोक(?:ो)?|हटाओ|अक्षम|निष्क्रिय|off)/i,
-      // मत = imperative "don't" (space-anchored so it never fires inside मतलब etc.).
-      // नहीं (bare declarative "no") is intentionally excluded, like the en bare-"no".
-      negate: /(?:^|\s)मत(?:\s|$)/,
-      meta: /समझा|क्या|कैसे|क्यों|बग|मतलब|तर्क|लॉजिक|काम\s*कर/,
-      strong: /स्क्रूज\s*(?:की\s*तरह|जैसे)/,
-    },
-  },
-  zh: {
-    reminder: {
-      head: 'SCROOGE 已激活',
-      modeClose: '。 ',
-      full: '名词短语结尾·平语,义明时删冗余结构助词·量词,礼貌层·filler 删除。',
-      suffix: ' code block·error·技术词原形。安全/不可逆操作用 normal prose。',
-      flag: { prefix: ' flag: ', sep: '·', suffix: ' 已激活。' },
-    },
-    countermand: 'SCROOGE OFF — 压缩模式解除。本回合起回到日常 register(常规文体)。',
-    flagHint: { lean: 'lean(最小代码)' },
-    savings: { full: { ratio: 0.67 } },
-    nlCue: {
-      name: /斯克鲁奇/,
-      // Chinese has no inter-word spaces, so JS `\b` is inert — the trigger anchors on
-      // explicit cue strings around the name (一样 / 那样 / 模式 / 来答…). Latin "scrooge"
-      // input is already caught by the en cue; the zh row owns the 斯克鲁奇 transliteration.
-      activate: /斯克鲁奇\s*(?:一样|那样|模式|风格|来\s*(?:答|回答|说|讲))/,
-      // Order-flexible: Chinese puts the off verb after the name (斯克鲁奇关闭) OR before
-      // it (关闭斯克鲁奇), unlike the KO/JA name-then-cue order — so both orders match.
-      off: /斯克鲁奇\s*(?:模式\s*)?(?:关闭|关掉|停止|停用|禁用|退出|off)|(?:关闭|关掉|停止|停用|禁用|退出)\s*斯克鲁奇/i,
-      // 别+verb / 不要 are the imperative "don't"; bare 别 is avoided — it rides inside
-      // benign words (识别/级别/特别), the same bare-"no" trap the en/hi rows dodge.
-      negate: /不要|别\s*(?:像|用|开|启|激活|启用|回答|答|说|讲|关|停|切换)/,
-      meta: /解释|说明|逻辑|bug|调试|怎么|如何|什么|为什么|为何|意思|含义|原理|运作|工作原理/i,
-      strong: /斯克鲁奇\s*(?:一样|那样|风格|来\s*(?:答|回答|说|讲))/,
-    },
-  },
 };
 
 // Language lookup. Returns the row, or null for an unknown language (callers below
@@ -156,10 +82,10 @@ export function langMeta(lang) {
   return LANG_META[lang] || null;
 }
 
-// Languages that carry activation metadata, in table order (= ko, en, ja). The NL
+// Languages that carry activation metadata, in table order (= ko, en). The NL
 // parser and any future N-ary dispatch iterate this, so a new table row joins the
 // dispatch automatically; appended rows (e.g. a test-injected `xx`) get lowest
-// priority and never disturb the ko→en→ja precedence.
+// priority and never disturb the ko→en precedence.
 export function metaLangs() {
   return Object.keys(LANG_META);
 }
@@ -182,7 +108,7 @@ export function flagHints(lang, flags) {
 // An unknown language (no table row — guarded against by test_registry_parity, so
 // unreachable for a real registry lang) falls back to the en row, label and all,
 // exactly matching the original hook's en fallthrough (which hardcoded "en" in the
-// header). For ko/en/ja the label IS the lang, so output stays byte-identical.
+// header). For ko/en the label IS the lang, so output stays byte-identical.
 export function buildReminder(lang, dial, flags = []) {
   // For an unknown lang, every piece — body, suffix, flag hints, AND the header label
   // — comes from the en row, matching the original en fallthrough exactly.

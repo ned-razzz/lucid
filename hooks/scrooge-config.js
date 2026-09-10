@@ -52,7 +52,7 @@ function loadRegistryForLangs() {
 }
 
 const DERIVED_LANGS = deriveValidLangs(loadRegistryForLangs());
-export const VALID_LANGS = DERIVED_LANGS.length ? DERIVED_LANGS : ['ko', 'en', 'ja'];
+export const VALID_LANGS = DERIVED_LANGS.length ? DERIVED_LANGS : ['ko', 'en'];
 export const VALID_DIALS = ['full'];
 
 // `lite` shipped through v0.22.1 and was removed in v0.23.0. Its own measurement

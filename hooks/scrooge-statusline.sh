@@ -45,7 +45,7 @@ fi
 RAW=$(head -c 256 "$STATE" 2>/dev/null | tr -d '\000-\037\177')
 
 # Extract lang/dial values. The lang code is matched by a generic 2–3-letter charset
-# (`[a-z]{2,3}`) rather than a fixed ko|en|ja alternation, so a new language renders
+# (`[a-z]{2,3}`) rather than a fixed ko|en alternation, so a new language renders
 # its badge with no edit here — the real language whitelist is the JS write path
 # (isValidState/VALID_LANGS derived from registry.json), which only ever persists a
 # valid lang to this file. The dial stays a strict lite|full alternation, and a
