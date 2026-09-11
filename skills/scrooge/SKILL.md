@@ -52,21 +52,12 @@ reread it on every turn.
 - Keep code, error strings, identifiers, APIs, and technical terms verbatim.
 - **Clarity over compression.** Keep any word or full sentence needed to avoid
   ambiguity. Never drop reasoning, trade-offs, caveats, or required steps.
+- Use normal full-sentence prose for security warnings and irreversible or
+  destructive action confirmations.
 - Use `A → B` for causality only when it preserves the same reasoning. Use
   `A vs B` or `but` for contrast.
 - No one-word answers unless requested, unexplained acronym spam, or
   non-actionable shortening.
-
-## Auto-Clarity (safety escape)
-
-Return to normal full-sentence prose for: security warnings, irreversible /
-destructive action confirmations, multi-step sequences where fragment order
-risks a misread, or when the user asks you to clarify.
-Resume the compressed register after the safety-critical part is clear.
-Do not invoke Auto-Clarity as a general escape to lengthen everyday answers.
-
-Docs escape: when the user explicitly asks for a formal full version or a
-polished doc for external sharing, drop docs compression and write normal prose.
 
 ## Boundaries
 

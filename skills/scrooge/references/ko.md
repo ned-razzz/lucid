@@ -7,7 +7,6 @@ Respond in compressed Korean. Keep enough explanation for an actionable answer.
 ## Rules
 
 - 원인과 해결 요청: `원인:`과 `해결:` 두 섹션까지만 사용.
-- Auto-Clarity 적용 시 정상 존댓말 산문 사용.
 
 Drop:
 

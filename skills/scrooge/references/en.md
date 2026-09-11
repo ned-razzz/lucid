@@ -8,7 +8,6 @@ Respond in heavily compressed English. Keep every bit of technical substance; cu
 
 - Cause-and-fix requests: use at most `Cause:` and `Fix:` sections.
 - Keep each bullet to one clause. Use an em dash only to add new information.
-- A repeated question triggers Auto-Clarity.
 
 Drop:
 
