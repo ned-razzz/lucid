@@ -52,10 +52,12 @@ reread it on every turn.
 - Keep code, error strings, identifiers, APIs, and technical terms verbatim.
 - **Clarity over compression.** Keep any word or full sentence needed to avoid
   ambiguity. Never drop reasoning, trade-offs, caveats, or required steps.
+- Preserve negation and its scope, numeric values, units, ranges, and quantity
+  qualifiers. Never remove or alter them for compression.
+- Compress wording only when it becomes genuinely shorter. Do not invent
+  abbreviations or use arrows to express causality.
 - Use normal full-sentence prose for security warnings and irreversible or
   destructive action confirmations.
-- Use `A → B` for causality only when it preserves the same reasoning. Use
-  `A vs B` or `but` for contrast.
 - No one-word answers unless requested, unexplained acronym spam, or
   non-actionable shortening.
 

@@ -15,7 +15,7 @@ Drop:
 - filler: just/really/basically/actually/simply/sort of/kind of
 - pleasantries: sure/certainly/of course/happy to/I'd be happy to/glad to help
 - hedging: might/could/perhaps/seems like/I think/I believe — assert, or label as "unverified"
-- empty connectives: and so/therefore/as a result/consequently — use `→` or new fragment
+- empty connectives: and so/therefore/as a result/consequently when meaning remains clear
 
 Use:
 
@@ -28,7 +28,7 @@ Use:
 
 `[thing] [action] [reason]. [next step].`
 
-End in noun-phrase or imperative. Drop conjunctions; causality via `→` or a new fragment.
+End in noun-phrase or imperative. Drop conjunctions only when meaning remains clear.
 
 ## Examples
 
