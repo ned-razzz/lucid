@@ -13,7 +13,7 @@
 
 ---
 
-## Overview
+# Overview
 
 Scrooge Skills는 Codex 응답의 기술 정보는 유지하면서 불필요한 표현과 출력 토큰을 줄이는 Agent Skill이다. 한국어와 영어를 지원한다.
 
@@ -21,9 +21,9 @@ Scrooge Skills는 Codex 응답의 기술 정보는 유지하면서 불필요한 
 
 Scrooge Skills는 [`scrooge-mode`](https://github.com/Kir93/scrooge-mode)를 기반으로 만들었으며, 한국어 출력 규칙은 [`fluent-korean`](https://github.com/snflkd/fluent-korean)의 언어 원칙을 참고해 보완했다.
 
-## Demo
+# Demo
 
-## Why Use?
+# Why Use?
 
 AI agent 덕분에 코드 생성은 더 이상 소프트웨어 개발의 병목이 아니다. 이제 핵심 병목은 생성된 코드와 구현 내용을 읽고 이해하는 일이다.
 
@@ -31,7 +31,7 @@ Scrooge Skills는 내용을 생략하지 않으면서 출력을 최대한 압축
 
 출력 토큰량이 줄어드는 것도 이점이다. 일반적으로 출력 토큰이 가장 비싸므로 응답을 짧게 만들어 비용을 아낄 수 있다. 다만 스킬을 읽고 적용하는 데 입력 토큰이 추가되므로, 실제 절약 효과는 대화와 사용 상황에 따라 달라질 수 있다.
 
-## Mechanism
+# Mechanism
 
 Scrooge Skills는 Codex의 표준 Agent Skill 구조를 사용한다. `SKILL.md`가
 `$scrooge` 명령을 해석하고 공통 압축 규칙을 적용하며, 선택한 언어의
@@ -42,7 +42,7 @@ Scrooge Skills는 Codex의 표준 Agent Skill 구조를 사용한다. `SKILL.md`
 선택한다. `$scrooge off`는 압축과 언어 고정을 해제한다. 별도 hooks, runtime,
 백그라운드 프로세스 없이 Codex가 응답을 생성할 때만 적용된다.
 
-### What gets compressed
+## What gets compressed
 
 의미를 더하지 않는 인사말, 반복, 상투적 도입부, 장황한 표현을 제거한다.
 짧은 동의어, 직접적인 결론, 필요한 최소 코드 블록을 우선한다. 원인과 해결을
@@ -52,7 +52,7 @@ Scrooge Skills는 Codex의 표준 Agent Skill 구조를 사용한다. `SKILL.md`
 그 밖의 기술 용어는 독자와 프로젝트에서 이미 쓰는 표기를 따른다. 따라서
 압축을 위해 임의의 약어를 만들거나 기호만으로 인과관계를 표현하지 않는다.
 
-### Meaning-preserving guardrails
+## Meaning-preserving guardrails
 
 압축은 삭제 규칙이 아니라 의미 보존 규칙과 함께 적용된다. 다음 정보는 짧게
 만들더라도 유지한다.
@@ -66,7 +66,7 @@ Scrooge Skills는 Codex의 표준 Agent Skill 구조를 사용한다. `SKILL.md`
 않은 추측은 삭제하거나 사실처럼 바꾸지 않고, `가능성이 크다`, `검증 필요`처럼
 짧게 상태를 남긴다.
 
-### Korean register
+## Korean register
 
 한국어는 전보체를 기본값으로 삼지 않는다. 간결한 `~다`, `~한다`, `~된다` 등의
 완결문을 기본으로 하며, 제목·표·체크리스트·짧은 상태 보고에서만 명사구나
@@ -81,9 +81,9 @@ Scrooge Skills는 Codex의 표준 Agent Skill 구조를 사용한다. `SKILL.md`
 기술 용어는 정착한 한국어 번역이나 음역을 우선하고, 정착하지 않았으면 원어를
 그대로 쓴다. 인용문, 고유명사, 식별자, 경로, 명령어는 원문을 유지한다.
 
-## Benchmarks
+# Benchmarks
 
-## Installation
+# Installation
 
 PowerShell에서 실행:
 
@@ -95,7 +95,7 @@ cd scrooge-mode
 
 기본 설치 경로는 `$CODEX_HOME\skills`이며, `CODEX_HOME`이 없으면 `%USERPROFILE%\.codex\skills`를 사용한다. 설치 후 Codex를 다시 시작한다.
 
-## How to Use
+# How to Use
 
 설치 후 대화에서 다음 명령을 사용한다.
 
