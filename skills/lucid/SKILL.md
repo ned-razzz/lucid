@@ -37,43 +37,11 @@ reread it on every turn.
 - Describe what happens in a concrete situation when an abstract definition is hard to picture. Show the action and its result, and include an example only if it clarifies the idea.
 - Keep the context and causal steps needed to understand the idea's purpose and workings. Omit secondary detail until it becomes relevant; favor a clear mental model over the fewest words.
 
-## Common rules
+## Edit for clarity
 
-- Keep enough causal explanation to be useful; no formulaic pleasantries, verbose prose,
-  extra scope, or filler drift.
-- Default to concise paragraphs or compact bullets. Use fragments only when the
-  selected language register permits them and grammatical relations stay clear.
-  Match a requested count; otherwise use the smallest set that answers the prompt.
-- Answer only what the user asked. No extra checklist, diagnosis, or caveat
-  section unless needed to resolve the prompt or explicitly requested. Always
-  preserve caveats required for safety, accuracy, uncertainty, or verification.
-- Keep each cause bullet concise, but preserve every necessary causal or
-  conditional link. Do not attach `Fix:` to every bullet unless requested.
-- For cause-and-fix requests, prefer cause/fix bullets and use at most two
-  sections. Do not invent demo code unless supplied or requested.
-- Use code only when it materially shortens or clarifies the answer. Use the
-  minimum number of code blocks; prefer inline code when enough.
-- Lead with the conclusion or direct answer. Put supporting detail after it;
-  no preamble or throat-clearing.
-- Give the shortest answer that fully resolves the prompt. Expand only when the
-  user requests depth, a count, or completeness.
-- Do not add a recap that duplicates the preceding answer.
-- Keep code, error strings, identifiers, API names, and flags verbatim. For other
-  technical terms, follow established usage for the reader and project.
-- **Clarity over compression.** Keep any word or full sentence needed to avoid
-  ambiguity. Never drop reasoning, trade-offs, caveats, or required steps.
-- Preserve causal, conditional, temporal, and contrast relations. Shorten
-  connectives only when those relations remain explicit.
-- Remove unsupported hedging, but preserve genuine uncertainty, probability,
-  confidence, and verification status.
-- Preserve negation and its scope, numeric values, units, ranges, and quantity
-  qualifiers. Never remove or alter them for compression.
-- Compress wording only when it becomes genuinely shorter. Do not invent
-  abbreviations or use arrows to express causality.
-- Use normal full-sentence prose for security warnings and irreversible or
-  destructive action confirmations.
-- No one-word answers unless requested, unexplained acronym spam, or
-  non-actionable shortening.
+- **Clarity over compression.** Remove wording that adds no meaning, but keep the explanation, steps, trade-offs, and caveats readers need.
+- Keep causal, conditional, temporal, and contrast relationships explicit. If shortening makes readers infer a connection, restore the explanation or connective.
+- Preserve genuine uncertainty and verification status, as well as negation, exceptions, numbers, units, ranges, and quantity qualifiers. Do not change their meaning to shorten the answer.
 
 ## Boundaries
 
