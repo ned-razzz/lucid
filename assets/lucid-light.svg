@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">Lucid halo of light</title>
+  <circle cx="64" cy="64" r="27" fill="none" stroke="#B77919" stroke-width="9"/>
+  <path fill="#B77919" d="M57 25 64 6 71 25ZM101 57l21 7-21 7ZM71 103l-7 19-7-19ZM25 71 6 64l19-7ZM31.5 38.5 24 24l14.5 7.5ZM89.5 31.5 104 24l-7.5 14.5ZM96.5 89.5 104 104l-14.5-7.5ZM38.5 89.5 24 104l7.5-14.5Z"/>
+</svg>

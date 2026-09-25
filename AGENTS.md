@@ -14,7 +14,7 @@ This repository contains Lucid, an Agent Skill for compatible coding agents. It 
 ```text
 .
 ├── assets/
-│   └── logo.svg
+│   └── lucid-light.svg
 ├── skills/
 │   └── lucid/
 │       ├── references/
