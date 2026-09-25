@@ -6,8 +6,6 @@ description: >
   readers.
 ---
 
-Answer in a compressed register. Keep every bit of technical substance — cut only fluff.
-
 ## Activation
 
 When this skill is selected, apply its response rules to the current task.
