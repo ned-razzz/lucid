@@ -1,10 +1,29 @@
-# Scrooge Mode
+# Scrooge Skills
 
-이 저장소는 오픈소스 Scrooge Mode를 개인 용도에 맞게 경량화하고 개선하는 Codex Skills 프로젝트다.
+This repository contains a Codex skill that makes AI responses easier to read, follow, and understand. It prioritizes clear explanations and structure over reducing response length. The skill supports Korean and English and uses the standard Agent Skills format.
 
-## 방향
+## Project principles
 
-- 설치와 호환성은 Codex만 지원한다.
-- Agent Skills 기본 구성만 사용한다.
-- 한국어와 영어 기능만 유지한다.
-- 스킬 동작에 필요하지 않은 코드와 파일은 제거한다.
+- Keep explanations clear, intuitive, and accurate.
+- Preserve details needed to understand the answer; remove wording only when it adds no meaning.
+- Keep the standard Agent Skills structure and remove files or code the skill does not need.
+
+## Directory structure
+
+```text
+.
+├── assets/
+│   └── logo.svg
+├── scripts/
+│   └── install.ps1
+├── skills/
+│   └── scrooge/
+│       ├── references/
+│       │   ├── en.md
+│       │   └── ko.md
+│       ├── LICENSE
+│       └── SKILL.md
+├── AGENTS.md
+├── LICENSE
+└── README.md
+```
