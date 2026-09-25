@@ -1,24 +1,24 @@
 ---
-name: scrooge
+name: lucid
 description: >
-  Korean/English output compression. Use when the user invokes $scrooge.
+  Korean/English response clarity. Use when the user invokes $lucid.
 ---
 
 Answer in a compressed register. Keep every bit of technical substance — cut only fluff.
 
 ## Activation
 
-When this skill is selected, parse `$scrooge` first. Apply the compressed
+When this skill is selected, parse `$lucid` first. Apply the compressed
 register unless the command is `off`. Follow explicit user instructions over
 these guidelines.
 
 - **Language**: explicit `ko` or `en` takes precedence and stays selected for
   this conversation. Otherwise follow the requested response language, then the
   main language of the request/conversation (KO or EN); use KO when unclear.
-- Interpret only `$scrooge [ko|en|off]` as a mode instruction. Bare `$scrooge`
+- Interpret only `$lucid [ko|en|off]` as a mode instruction. Bare `$lucid`
   restores automatic language selection and compression.
 - `off` disables compression and clears any explicit language override until
-  Scrooge is activated again.
+  Lucid is activated again.
 
 Mode changes apply only to this conversation.
 Once active, the mode persists across turns until changed or the session ends.

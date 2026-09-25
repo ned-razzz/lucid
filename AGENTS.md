@@ -1,6 +1,6 @@
-# Scrooge Skills
+# Lucid
 
-This repository contains a Codex skill that makes AI responses easier to read, follow, and understand. It prioritizes clear explanations and structure over reducing response length. The skill supports Korean and English and uses the standard Agent Skills format.
+This repository contains Lucid, a Codex skill that makes AI responses easier to read, follow, and understand. It prioritizes clear explanations and structure over reducing response length. Lucid supports Korean and English and uses the standard Agent Skills format.
 
 ## Project principles
 
@@ -17,7 +17,7 @@ This repository contains a Codex skill that makes AI responses easier to read, f
 ├── scripts/
 │   └── install.ps1
 ├── skills/
-│   └── scrooge/
+│   └── lucid/
 │       ├── references/
 │       │   ├── en.md
 │       │   └── ko.md

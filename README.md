@@ -1,35 +1,35 @@
 <p align="center">
-  <img src="assets/logo.svg" width="96" height="96" alt="Scrooge Skills logo" />
+  <img src="assets/logo.svg" width="96" height="96" alt="Lucid logo" />
 </p>
 
-<h1 align="center">Scrooge Skills</h1>
+<h1 align="center">Lucid</h1>
 
 <p align="center">Codex 전용 Agent Skill · 쉽고 명확하게 읽히는 응답</p>
 
 <p align="center">
-  <a href="https://github.com/ned-razzz/scrooge-mode/stargazers"><img src="https://img.shields.io/github/stars/ned-razzz/scrooge-mode?style=flat&color=yellow" alt="GitHub stars" /></a>
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/ned-razzz/scrooge-mode?style=flat" alt="MIT license" /></a>
+  <a href="https://github.com/ned-razzz/Lucid/stargazers"><img src="https://img.shields.io/github/stars/ned-razzz/Lucid?style=flat&color=yellow" alt="GitHub stars" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/ned-razzz/Lucid?style=flat" alt="MIT license" /></a>
 </p>
 
 ---
 
 # Overview
 
-Scrooge Skills는 Codex의 응답을 쉽고 빠르게 이해할 수 있도록 가독성과 직관성을 높이는 Agent Skill이다. 필요한 정보는 유지하면서 불필요한 표현을 덜어내고, 내용의 흐름이 한눈에 보이도록 설명을 구성한다.
+Lucid는 Codex의 응답을 쉽고 빠르게 이해할 수 있도록 가독성과 직관성을 높이는 Agent Skill이다. 필요한 정보는 유지하면서 불필요한 표현을 덜어내고, 내용의 흐름이 한눈에 보이도록 설명을 구성한다.
 
 Codex 전용의 표준 Agent Skills만 사용하도록 경량화했다.
 
 한국어와 영어를 지원한다.
 
-Scrooge Skills는 [`scrooge-mode`](https://github.com/Kir93/scrooge-mode)를 기반으로 만들었으며, 한국어 출력 규칙은 [`fluent-korean`](https://github.com/snflkd/fluent-korean)의 언어 원칙을 참고해 보완했다.
+Lucid는 [`scrooge-mode`](https://github.com/Kir93/scrooge-mode)를 기반으로 만들었으며, 한국어 출력 규칙은 [`fluent-korean`](https://github.com/snflkd/fluent-korean)의 언어 원칙을 참고해 보완했다.
 
 # Why Use?
 
 AI 에이전트가 코드를 빠르게 생성할수록, 그 결과를 읽고 이해하고 검토하는 일이 더 중요해진다.
 
-Scrooge Skills는 응답을 짧게 만드는 데 그치지 않고, 내용을 쉽게 파악할 수 있도록 설명 방식과 글의 구조를 다듬는다.
+Lucid는 응답을 짧게 만드는 데 그치지 않고, 내용을 쉽게 파악할 수 있도록 설명 방식과 글의 구조를 다듬는다.
 
-Scrooge Skills는 Codex의 응답에 다음 원칙을 적용한다.
+Lucid는 Codex의 응답에 다음 원칙을 적용한다.
 
 - 먼저 전체 그림을 보여주고, 핵심 구조와 요소 간의 관계를 설명한 뒤 필요한 세부 정보를 더한다.
 - 어려운 개념은 쉬운 말과 구체적인 설명으로 풀어 쓴다.
@@ -39,13 +39,13 @@ Scrooge Skills는 Codex의 응답에 다음 원칙을 적용한다.
 
 # Mechanism
 
-Scrooge Skills는 Codex의 표준 Agent Skill 구조를 사용한다. `SKILL.md`가
-`$scrooge` 명령을 해석하고 공통 응답 규칙을 적용하며, 선택한 언어에 따라
+Lucid는 Codex의 표준 Agent Skill 구조를 사용한다. `SKILL.md`가
+`$lucid` 명령을 해석하고 공통 응답 규칙을 적용하며, 선택한 언어에 따라
 `references/ko.md` 또는 `references/en.md`를 읽는다.
 
-`$scrooge ko` 또는 `$scrooge en`은 언어를 현재 대화에 고정한다. 언어를
-지정하지 않은 `$scrooge`는 요청과 대화의 주 언어를 기준으로 레지스터를
-선택한다. `$scrooge off`는 응답 규칙과 언어 고정을 해제한다. 별도 hooks, runtime,
+`$lucid ko` 또는 `$lucid en`은 언어를 현재 대화에 고정한다. 언어를
+지정하지 않은 `$lucid`는 요청과 대화의 주 언어를 기준으로 레지스터를
+선택한다. `$lucid off`는 응답 규칙과 언어 고정을 해제한다. 별도 hooks, runtime,
 백그라운드 프로세스 없이 Codex가 응답을 생성할 때만 적용된다.
 
 ## How responses become clearer
@@ -88,8 +88,8 @@ Scrooge Skills는 Codex의 표준 Agent Skill 구조를 사용한다. `SKILL.md`
 PowerShell에서 실행:
 
 ```powershell
-git clone https://github.com/ned-razzz/scrooge-mode.git
-cd scrooge-mode
+git clone https://github.com/ned-razzz/Lucid.git
+cd Lucid
 .\scripts\install.ps1
 ```
 
@@ -99,8 +99,8 @@ cd scrooge-mode
 
 설치 후 대화에서 다음 명령을 사용한다.
 
-- `$scrooge [ko|en]`: 선택한 언어의 응답 규칙을 현재 대화에 적용
-- `$scrooge`: 대화 언어에 맞춰 응답 규칙을 자동 선택
-- `$scrooge off`: 응답 규칙과 언어 고정 해제
+- `$lucid [ko|en]`: 선택한 언어의 응답 규칙을 현재 대화에 적용
+- `$lucid`: 대화 언어에 맞춰 응답 규칙을 자동 선택
+- `$lucid off`: 응답 규칙과 언어 고정 해제
 
 활성화 상태는 대화가 끝나거나 `off`로 해제할 때까지 유지된다.

@@ -1,4 +1,4 @@
-<!-- Scrooge register rule — lang: en -->
+<!-- Lucid register rule — lang: en -->
 
 # EN
 

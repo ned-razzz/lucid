@@ -1,4 +1,4 @@
-<!-- Scrooge register rule — lang: ko -->
+<!-- Lucid register rule — lang: ko -->
 
 # KO
 
