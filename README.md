@@ -4,7 +4,7 @@
 
 <h1 align="center">Lucid</h1>
 
-<p align="center">Codex 전용 Agent Skill · 쉽고 명확하게 읽히는 응답</p>
+<p align="center">Agent Skills 호환 코딩 에이전트용 · 쉽고 명확하게 읽히는 응답</p>
 
 <p align="center">
   <a href="https://github.com/ned-razzz/Lucid/stargazers"><img src="https://img.shields.io/github/stars/ned-razzz/Lucid?style=flat&color=yellow" alt="GitHub stars" /></a>
@@ -15,9 +15,9 @@
 
 # Overview
 
-Lucid는 Codex의 응답을 쉽고 빠르게 이해할 수 있도록 가독성과 직관성을 높이는 Agent Skill이다. 필요한 정보는 유지하면서 불필요한 표현을 덜어내고, 내용의 흐름이 한눈에 보이도록 설명을 구성한다.
+Lucid는 AI agent의 응답을 쉽고 빠르게 이해할 수 있도록 가독성과 직관성을 높이는 Agent Skill이다. 필요한 정보는 유지하면서 불필요한 표현을 덜어내고, 내용의 흐름이 한눈에 보이도록 설명을 구성한다.
 
-Codex 전용의 표준 Agent Skills만 사용하도록 경량화했다.
+표준 Agent Skills 형식으로 작성하여 이를 지원하는 코딩 에이전트에서 사용할 수 있다.
 
 한국어와 영어를 지원한다.
 
@@ -25,11 +25,11 @@ Lucid는 [`scrooge-mode`](https://github.com/Kir93/scrooge-mode)를 기반으로
 
 # Why Use?
 
-AI 에이전트가 코드를 빠르게 생성할수록, 그 결과를 읽고 이해하고 검토하는 일이 더 중요해진다.
+AI agent가 코드를 빠르게 생성할수록, 그 결과를 읽고 이해하고 검토하는 일이 더 중요해진다.
 
 Lucid는 응답을 짧게 만드는 데 그치지 않고, 내용을 쉽게 파악할 수 있도록 설명 방식과 글의 구조를 다듬는다.
 
-Lucid는 Codex의 응답에 다음 원칙을 적용한다.
+Lucid는 에이전트의 응답에 다음 원칙을 적용한다.
 
 - 먼저 전체 그림을 보여주고, 핵심 구조와 요소 간의 관계를 설명한 뒤 필요한 세부 정보를 더한다.
 - 어려운 개념은 쉬운 말과 구체적인 설명으로 풀어 쓴다.
@@ -39,14 +39,10 @@ Lucid는 Codex의 응답에 다음 원칙을 적용한다.
 
 # Mechanism
 
-Lucid는 Codex의 표준 Agent Skill 구조를 사용한다. `SKILL.md`가
-`$lucid` 명령을 해석하고 공통 응답 규칙을 적용하며, 선택한 언어에 따라
-`references/ko.md` 또는 `references/en.md`를 읽는다.
-
-`$lucid ko` 또는 `$lucid en`은 언어를 현재 대화에 고정한다. 언어를
-지정하지 않은 `$lucid`는 요청과 대화의 주 언어를 기준으로 레지스터를
-선택한다. `$lucid off`는 응답 규칙과 언어 고정을 해제한다. 별도 hooks, runtime,
-백그라운드 프로세스 없이 Codex가 응답을 생성할 때만 적용된다.
+Agent Skills 호환 에이전트는 `SKILL.md`의 이름과 설명을 읽고 작업에 맞는
+스킬을 선택한다. Lucid가 선택되면 공통 설명 원칙을 적용하고, 응답 언어에 따라
+`references/ko.md` 또는 `references/en.md`를 읽는다. 호출 방법과 스킬 설치
+경로는 사용하는 에이전트에 따라 달라진다.
 
 ## How responses become clearer
 
@@ -85,22 +81,14 @@ Lucid는 Codex의 표준 Agent Skill 구조를 사용한다. `SKILL.md`가
 
 # Installation
 
-PowerShell에서 실행:
-
-```powershell
-git clone https://github.com/ned-razzz/Lucid.git
-cd Lucid
-.\scripts\install.ps1
-```
-
-기본 설치 경로는 `$CODEX_HOME\skills`이며, `CODEX_HOME`이 없으면 `%USERPROFILE%\.codex\skills`를 사용한다. 설치 후 Codex를 다시 시작한다.
+`skills/lucid` 디렉터리 전체를 사용하는 에이전트의 스킬 디렉터리에 복사한다.
+많은 에이전트가 프로젝트의 `.agents/skills/lucid` 또는 사용자 홈의
+`~/.agents/skills/lucid`를 인식하지만, 실제 검색 경로와 설치 방법은 에이전트
+문서를 확인한다.
 
 # How to Use
 
-설치 후 대화에서 다음 명령을 사용한다.
-
-- `$lucid [ko|en]`: 선택한 언어의 응답 규칙을 현재 대화에 적용
-- `$lucid`: 대화 언어에 맞춰 응답 규칙을 자동 선택
-- `$lucid off`: 응답 규칙과 언어 고정 해제
-
-활성화 상태는 대화가 끝나거나 `off`로 해제할 때까지 유지된다.
+코드, 디버깅 결과, 구현 결정 또는 기술 개념을 설명해 달라고 요청하면 에이전트가
+Lucid의 설명을 보고 관련성을 판단한다. 명시적으로 사용하고 싶다면 사용하는
+에이전트의 스킬 선택 방법을 따른다. 한국어 또는 영어로 답해 달라고 요청하면
+해당 언어의 규칙을 적용한다.
