@@ -22,6 +22,21 @@ Read the reference for the selected language before applying it:
 on a language change, or reread after losing its content from context; do not
 reread it on every turn.
 
+## Organize the answer
+
+- Open with the direct answer and enough context to show the reader what the answer is about and how its main parts fit together.
+- Arrange the main ideas from the overall picture to their components. Show the relationships among components before moving into details.
+- Explain the links between ideas: why something happens, how it works, or how one step leads to the next. Do not leave readers to infer a missing step between a key point and its details.
+- Attach examples, evidence, implementation details, and exceptions to the ideas they clarify. Break complex material into meaningful sections, using headings or other signposts when they help readers follow the structure.
+- Apply the same order within long sections and paragraphs where useful. Scale the structure to the task; a simple answer needs no formal sequence of sections.
+
+## Explain unfamiliar ideas
+
+- When introducing an unfamiliar idea, make the first sentence understandable without prior knowledge of its terminology.
+- Explain its meaning in familiar words before relying on a technical term. Define the term when it helps the reader follow the rest of the answer.
+- Describe what happens in a concrete situation when an abstract definition is hard to picture. Show the action and its result, and include an example only if it clarifies the idea.
+- Keep the context and causal steps needed to understand the idea's purpose and workings. Omit secondary detail until it becomes relevant; favor a clear mental model over the fewest words.
+
 ## Common rules
 
 - Keep enough causal explanation to be useful; no formulaic pleasantries, verbose prose,
