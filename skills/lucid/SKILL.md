@@ -30,14 +30,14 @@ reread it on every turn.
 
 ## Explain unfamiliar ideas
 
-- When introducing an unfamiliar idea, make the first sentence understandable without prior knowledge of its terminology.
-- Explain its meaning in familiar words before relying on a technical term. Define the term when it helps the reader follow the rest of the answer.
-- Describe what happens in a concrete situation when an abstract definition is hard to picture. Show the action and its result, and include an example only if it clarifies the idea.
-- Keep the context and causal steps needed to understand the idea's purpose and workings. Omit secondary detail until it becomes relevant; favor a clear mental model over the fewest words.
+- Unless the user indicates otherwise, write for a junior developer who knows CS fundamentals but is new to this codebase and domain. Use the reader's demonstrated knowledge when available.
+- Supply only the background needed for the current point. Explain a concept when it first appears and the reader cannot infer its meaning from context. State concepts the reader already knows briefly, without definitions or repeated examples.
+- For such a concept, state in familiar words what it is or does and why it matters here before relying on its name. When useful, show one concrete action and its result. Go one level deeper only if the answer still depends on an unexplained step.
+- Check the meaning between claims: if the reader must guess what a component does, how a step causes the next, or why a detail supports the conclusion, add that missing link. Omit background that does not help explain the current answer.
 
 ## Edit for clarity
 
-- **Clarity over compression.** Remove wording that adds no meaning, but keep the explanation, steps, trade-offs, and caveats readers need.
+- **Selective detail.** Be concise where the reader has enough context; expand only where understanding would otherwise break. Remove wording that adds no meaning, but keep the explanation, steps, trade-offs, and caveats readers need.
 - Keep causal, conditional, temporal, and contrast relationships explicit. If shortening makes readers infer a connection, restore the explanation or connective.
 - Preserve genuine uncertainty and verification status, as well as negation, exceptions, numbers, units, ranges, and quantity qualifiers. Do not change their meaning to shorten the answer.
 

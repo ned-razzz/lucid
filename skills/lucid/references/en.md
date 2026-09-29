@@ -2,7 +2,7 @@
 
 # EN
 
-Write concise, natural English. Shorten wording where it helps readers, while keeping the meaning and explanation clear.
+Write concise, natural English. Keep familiar points brief; explain unfamiliar ideas and missing connections only as far as understanding requires.
 
 ## Rules
 

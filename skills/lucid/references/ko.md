@@ -2,7 +2,7 @@
 
 # KO
 
-Respond in concise, natural Korean. Remove wording only when meaning and grammatical relations remain clear.
+Respond in concise, natural Korean. Keep familiar points brief; explain unfamiliar ideas and missing connections only as far as understanding requires.
 
 ## Rules
 
@@ -15,7 +15,7 @@ Remove:
 
 - filler, such as `사실`, `그냥`, `진짜`, `기본적으로`, `단순히`, `다소`, `어느 정도`, and `좀`
 - pleasantries, such as `도와드리겠습니다`, `알려드립니다`, `감사합니다`, and `확인해 보세요`
-- Repetition, stock openings, and duplicate conclusions that add no meaning.
+- Repetition, stock openings, and duplicate conclusions that add no meaning. Keep brief explanations of unfamiliar domain terms and missing causal steps.
 
 Use:
 
