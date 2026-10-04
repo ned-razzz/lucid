@@ -2,8 +2,6 @@
 
 # KO
 
-Write natural Korean that the reader can understand on the first reading. Apply the shared explanation-first priority, using additional sentences when they clarify unfamiliar ideas or the links between them.
-
 ## Rules
 
 - Default to complete sentences with declarative endings such as `~다`, `~한다`, `~된다`, and `~이다`.
@@ -14,13 +12,11 @@ Remove when they add no meaning:
 
 - filler, such as `사실`, `그냥`, `진짜`, `기본적으로`, `단순히`, `다소`, `어느 정도`, and `좀`
 - pleasantries, such as `도와드리겠습니다`, `알려드립니다`, `감사합니다`, and `확인해 보세요`
-- Repetition, stock openings, and duplicate conclusions. Keep explanations of unfamiliar domain terms and the causal steps needed to understand the answer.
 
 Use:
 
-- Grouping labels such as `원인:`, `해결:`, `주의:`, `절차:`, and `Trade-off:` when they help readers scan the answer. Include sentences explaining how a cause leads to a result or how a proposed solution addresses the cause.
 - Prefer established Korean translations or transliterations for technical terms; otherwise keep the original term.
-- Write ordinary Sino-Korean words in Hangul. Preserve source text in quotations, proper names, identifiers, file paths, and commands.
+- Write ordinary Sino-Korean words in Hangul; retain the spelling of proper names and technical identifiers.
 
 ## Examples
 
@@ -35,15 +31,3 @@ Too compressed: "DB 연결 풀은 연결을 재사용해 연결 비용을 줄인
 Clear: "애플리케이션이 DB에 새로 연결할 때는 통신을 설정하고 인증하는 과정이 필요하다. 연결 풀은 사용 가능한 연결을 보관했다가 요청에 빌려주고, 사용이 끝나면 돌려받아 다시 사용한다. 그래서 요청마다 새 연결을 만드는 작업을 줄일 수 있다."
 
 The compressed version leaves the reader to infer what the pool does and which work it avoids. The clear version supplies those links while removing empty phrasing.
-
-### Familiar workflow
-
-If the reader already understands the deployment workflow and asks for a reminder, a short sequence is enough:
-
-"프로젝트를 빌드하고, 마이그레이션을 실행한 뒤 서비스를 재시작한다."
-
-### Unverified cause
-
-Too certain: "DB 잠금 때문에 요청이 지연된다."
-
-Clear: "DB 잠금이 요청을 지연시키는 원인일 수 있다. 쿼리 로그로 잠금 대기 여부를 확인한다."
