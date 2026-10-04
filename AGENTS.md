@@ -9,6 +9,13 @@ This repository contains Lucid, an Agent Skill for compatible coding agents. It 
 - Keep skill instructions independent of agent-specific commands, paths, and persistent modes.
 - Keep the standard Agent Skills structure and remove files or code the skill does not need.
 
+## Skill Instructions
+
+When revising a Skill, apply the requested change without turning the editing
+conversation into additional instructions. Keep only guidance needed to execute
+the workflow or make decisions; omit explanations and redundant prohibitions
+or permissions that merely restate what was removed or changed.
+
 ## Directory structure
 
 ```text
