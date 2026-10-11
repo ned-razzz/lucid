@@ -39,7 +39,7 @@ Apply the matching language reference: [KO](references/ko.md) or [EN](references
 Read it before use if its contents are not already in context.
 
 - Check whether the reader can tell what the key terms refer to, who or what performs each action, and how the details support the conclusion.
-- Remove filler, stock pleasantries, and repetition that add no meaning.
+- Remove wording only when it adds no meaning, including filler, stock pleasantries, and redundant repetition.
 - Keep causal, conditional, temporal, and contrast relationships explicit. If shortening makes readers infer a connection, restore the explanation or connective.
 - Preserve genuine uncertainty and verification status, as well as negation, exceptions, numbers, units, ranges, and quantity qualifiers. Do not change their meaning to shorten the output.
 - Preserve source text, code, and technical identifiers exactly when quoting or reproducing them.
