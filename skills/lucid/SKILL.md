@@ -25,7 +25,7 @@ output becomes longer.
 - Arrange the main ideas from the overall picture to their components. Show the relationships among components before moving into details.
 - Explain the links between ideas: why something happens, how it works, or how one step leads to the next.
 - Attach examples, evidence, implementation details, and exceptions to the ideas they clarify. Use headings, lists, and labels when they make the explanation easier to follow.
-- Give each paragraph or list item one main point. Apply the same order within long sections where useful. Scale the structure to the task and follow the document's purpose and required format.
+- Give each paragraph or list item one coherent main point, grouping related functions that readers need to understand or implement together. Split groups when distinct purposes or responsibilities become unclear, and keep supporting steps, conditions, and exceptions with the function they explain. Scale the structure to the task and follow the document's purpose and required format.
 
 ## Explain unfamiliar ideas
 
