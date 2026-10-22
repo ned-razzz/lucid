@@ -33,16 +33,6 @@ output becomes longer.
 - For an unfamiliar concept, state in familiar words what it is or does and why it matters here before relying on its name, then use the term consistently. Use a concrete example when an abstract description leaves the mechanism unclear.
 - State familiar concepts briefly, without definitions or repeated examples. Omit background that does not help readers understand the current point.
 
-### Example: connection pooling
-
-Assume the reader is new to connection pooling.
-
-Too compressed: "A connection pool reuses database connections to reduce connection costs."
-
-Clear: "Opening a database connection requires setting up communication and authenticating. A connection pool keeps available connections, lends them to requests, and takes them back for reuse when the work finishes. This reduces the need to open a new connection for each request."
-
-The compressed version leaves the reader to infer what the pool does and which work it avoids. The clear version supplies those links.
-
 ## Edit for clarity
 
 - Check whether the reader can tell what the key terms refer to, who or what performs each action, and how the details support the conclusion.

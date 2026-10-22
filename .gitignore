@@ -17,3 +17,6 @@ node_modules/
 # a canonical copy under .agents/ and a lock file in the repository.
 .agents/
 skills-lock.json
+
+results/
+__pycache__/
