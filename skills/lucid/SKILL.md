@@ -59,5 +59,16 @@ The compressed version leaves the reader to infer what the pool does and which w
 
 ### Korean expression
 
-For Korean output, apply [KO](references/ko.md). Read it before use if its
-contents are not already in context.
+- Default to complete sentences with declarative endings such as `~다`, `~한다`, `~된다`, and `~이다`.
+- Drop the subject only when one antecedent is certain and the topic has not changed.
+- Drop a particle only when agent, object, direction, location, means, and contrast remain equally clear.
+
+Remove when they add no meaning:
+
+- filler, such as `사실`, `그냥`, `진짜`, `기본적으로`, `단순히`, `다소`, `어느 정도`, and `좀`
+- pleasantries, such as `도와드리겠습니다`, `알려드립니다`, `감사합니다`, and `확인해 보세요`
+
+Use:
+
+- Prefer established Korean translations or transliterations for technical terms; otherwise keep the original term.
+- Write ordinary Sino-Korean words in Hangul; retain the spelling of proper names and technical identifiers.

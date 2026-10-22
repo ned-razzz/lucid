@@ -18,8 +18,7 @@ the workflow or make decisions; omit explanations and redundant prohibitions
 or permissions that merely restate what was removed or changed.
 
 Keep shared explanation and editing principles in `skills/lucid/SKILL.md`.
-Keep English expression guidance in `skills/lucid/SKILL.md` and Korean
-expression rules and examples in `skills/lucid/references/ko.md`.
+Keep English and Korean expression guidance in `skills/lucid/SKILL.md`.
 
 ## Directory structure
 
@@ -30,8 +29,7 @@ expression rules and examples in `skills/lucid/references/ko.md`.
 ├── skills/
 │   └── lucid/
 │       ├── references/
-│       │   ├── documentation.md
-│       │   └── ko.md
+│       │   └── documentation.md
 │       ├── LICENSE
 │       └── SKILL.md
 ├── AGENTS.md
