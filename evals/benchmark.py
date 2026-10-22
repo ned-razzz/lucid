@@ -7,7 +7,6 @@ import re
 import shutil
 import subprocess
 import tempfile
-import time
 
 HERE = Path(__file__).resolve().parent
 SKILL = HERE.parent / "skills" / "lucid"
@@ -29,8 +28,6 @@ def generate(question, output, cli, documentation=False):
         raise ValueError("질문 파일에 질문을 입력해 주세요.")
     variants = instructions(documentation)
     output.mkdir(parents=True, exist_ok=False)
-    metadata = {"model": MODEL, "reasoning_effort": REASONING_EFFORT,
-                "question": question, "documentation": documentation, "runs": {}}
     for name, guidance in variants.items():
         prompt = (f"Response guidance:\n{guidance}\n\n" if guidance else "") + "Task:\n" + question
         with tempfile.TemporaryDirectory(prefix="lucid-compare-") as directory:
@@ -43,10 +40,8 @@ def generate(question, output, cli, documentation=False):
                        "-c", "project_doc_max_bytes=0", "-c", 'web_search="disabled"',
                        "--disable", "shell_tool", "--disable", "apps", "--disable", "plugins",
                        "--disable", "multi_agent", "--disable", "hooks", "-"]
-            start = time.monotonic()
             result = subprocess.run(command, input=prompt, text=True, encoding="utf-8",
                                     capture_output=True, cwd=directory, timeout=240)
-        (output / f"{name}.jsonl").write_text(result.stdout, encoding="utf-8")
         if result.returncode:
             raise RuntimeError(f"{name}: {result.stderr or result.stdout}")
         events = [json.loads(line) for line in result.stdout.splitlines() if line.strip()]
@@ -56,11 +51,8 @@ def generate(question, output, cli, documentation=False):
         answers = [item["text"] for item in items if item.get("type") == "agent_message"]
         completed = next((event for event in reversed(events) if event.get("type") == "turn.completed"), None)
         if not completed or not answers or not answers[-1].strip():
-            raise RuntimeError(f"{name}: CLI 응답을 확인해 주세요: {output / (name + '.jsonl')}")
-        metadata["runs"][name] = {"guidance": guidance, "usage": completed.get("usage"),
-                                   "duration_ms": round((time.monotonic() - start) * 1000)}
+            raise RuntimeError(f"{name}: 정상적으로 완료된 최종 답변이 없습니다.")
         (output / f"{name}.md").write_text(answers[-1], encoding="utf-8")
-        (output / "metadata.json").write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         print(f"Saved: {output / (name + '.md')}")
 
 

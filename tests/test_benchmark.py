@@ -33,9 +33,8 @@ class RunnerChecks(unittest.TestCase):
                     self.assertEqual(command[command.index("--model") + 1], "gpt-6-luna")
                     self.assertIn('model_reasoning_effort="medium"', command)
                     self.assertIn("--ignore-user-config", command)
-                saved = json.loads((output / "metadata.json").read_text(encoding="utf-8"))
-                self.assertEqual((saved["model"], saved["reasoning_effort"]), ("gpt-6-luna", "medium"))
-                self.assertTrue(all((output / f"{name}.md").exists() for name in benchmark.instructions()))
+                self.assertEqual({path.name for path in output.iterdir()},
+                                 {f"{name}.md" for name in benchmark.instructions()})
                 with self.assertRaises(FileExistsError):
                     benchmark.generate("test-input", output, "unused")
                 self.assertEqual(call.call_count, 3)
