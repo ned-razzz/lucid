@@ -9,6 +9,35 @@ from evals import benchmark
 
 
 class RunnerChecks(unittest.TestCase):
+    def test_default_runs_all_questions_in_order_and_skips_readme(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            questions = root / "questions"
+            questions.mkdir()
+            (questions / "02-second.md").write_text("second", encoding="utf-8")
+            (questions / "01-first.md").write_text("first", encoding="utf-8-sig")
+            (questions / "README.md").write_text("", encoding="utf-8")
+            output = root / "results"
+            with patch.object(benchmark, "HERE", root), \
+                 patch("sys.argv", ["benchmark.py", "--cli", "unused", "--out", str(output)]), \
+                 patch.object(benchmark, "generate") as generate:
+                benchmark.main()
+                self.assertEqual([call.args for call in generate.call_args_list], [
+                    ("first", output / "01-first", "unused", False),
+                    ("second", output / "02-second", "unused", False),
+                ])
+
+    def test_explicit_question_keeps_single_output_directory(self):
+        with tempfile.TemporaryDirectory() as directory:
+            question = Path(directory) / "question.md"
+            question.write_text("single", encoding="utf-8")
+            output = Path(directory) / "result"
+            with patch("sys.argv", ["benchmark.py", str(question), "--cli", "unused",
+                                    "--out", str(output), "--documentation"]), \
+                 patch.object(benchmark, "generate") as generate:
+                benchmark.main()
+                generate.assert_called_once_with("single", output, "unused", True)
+
     def test_empty_question_does_not_create_outputs_or_call_cli(self):
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory) / "result"

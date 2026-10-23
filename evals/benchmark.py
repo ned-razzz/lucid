@@ -1,4 +1,4 @@
-"""Generate three answers to a user-supplied question for manual comparison."""
+"""Generate three answers per question for manual comparison."""
 import argparse
 from datetime import datetime, timezone
 import json
@@ -58,18 +58,31 @@ def generate(question, output, cli, documentation=False):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("question", nargs="?", type=Path, default=HERE / "question.md")
+    parser.add_argument("question", nargs="?", type=Path, help="Question file (default: all Markdown questions in evals/questions, excluding README.md)")
     parser.add_argument("--documentation", action="store_true", help="Include Lucid's documentation reference")
     parser.add_argument("--cli", default=shutil.which("codex.exe") or shutil.which("codex"))
     parser.add_argument("--out", type=Path, default=HERE / "results" / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ"))
     args = parser.parse_args()
     try:
-        question = args.question.read_text(encoding="utf-8-sig")
-        if not question.strip():
-            parser.error("질문 파일에 질문을 입력해 주세요.")
+        paths = [args.question] if args.question else sorted(
+            path for path in (HERE / "questions").glob("*.md")
+            if path.is_file() and path.name.lower() != "readme.md"
+        )
+        if not paths:
+            parser.error("evals/questions에 질문 Markdown 파일이 없습니다.")
+        questions = [(path, path.read_text(encoding="utf-8-sig")) for path in paths]
+        for path, question in questions:
+            if not question.strip():
+                parser.error(f"{path}: 질문 파일에 질문을 입력해 주세요.")
         if not args.cli:
             parser.error("로그인된 Codex CLI가 필요합니다. --cli로 경로를 지정할 수 있습니다.")
-        generate(question, args.out.resolve(), args.cli, args.documentation)
+        output = args.out.resolve()
+        if not args.question:
+            output.mkdir(parents=True, exist_ok=False)
+        for path, question in questions:
+            print(f"Question: {path}")
+            destination = output if args.question else output / path.stem
+            generate(question, destination, args.cli, args.documentation)
     except (OSError, ValueError, RuntimeError, subprocess.TimeoutExpired) as error:
         parser.exit(1, f"{error}\n")
 
