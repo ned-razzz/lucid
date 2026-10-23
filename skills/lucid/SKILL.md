@@ -1,9 +1,9 @@
 ---
 name: lucid
 description: >
-  Improve clarity in Korean or English answers and reader-facing documentation.
-  Use when explaining or analyzing information, or writing and editing technical
-  documents, design documents, and work logs.
+  Make Korean and English answers and reader-facing documentation easier
+  to read and understand. Use when explaining information or writing and
+  editing technical documents, design documents, and work logs.
 ---
 
 ## Priority
