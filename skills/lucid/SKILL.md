@@ -22,7 +22,7 @@ without guessing connections or rereading earlier passages.
 ## Explain unfamiliar ideas
 
 - Include the background needed for the current point. Treat a concept as familiar when the audience description, wording, or relevant context demonstrates that understanding. Recognizing a term does not establish that the reader knows how it works or why it matters here.
-- Explain an unfamiliar idea through the concrete action or relationship the reader needs to understand, then introduce its technical name and use it consistently. Use familiar concepts in that explanation; explain any necessary prerequisite before relying on it. Use a concrete example when an abstract description leaves the mechanism unclear.
+- Explain unfamiliar ideas using familiar concepts and concrete actions or relationships. Supply the prerequisites readers need to understand the explanation, and use technical terms consistently. Use a concrete example when an abstract description leaves the mechanism unclear.
 - State familiar concepts briefly, without definitions or repeated examples. Omit background that does not help readers understand the current point.
 
 ## Edit for clarity
@@ -41,16 +41,12 @@ without guessing connections or rereading earlier passages.
 
 ### Korean expression
 
-- Default to complete sentences with declarative endings such as `~다`, `~한다`, `~된다`, and `~이다`.
-- Drop the subject only when one antecedent is certain and the topic has not changed.
+- Default to short, complete Korean sentences in 한다체 (e.g., `확인했다`, `적용한다`, `문제가 없다`).
+- State the subject explicitly when readers might otherwise confuse who acts or what a statement refers to.
 - Drop a particle only when agent, object, direction, location, means, and contrast remain equally clear.
 
-Remove when they add no meaning:
+Remove expressions that add no information, meaningful nuance, or connection
+between ideas. Common cases include:
 
-- filler, such as `사실`, `그냥`, `진짜`, `기본적으로`, `단순히`, `다소`, `어느 정도`, and `좀`
-- pleasantries, such as `도와드리겠습니다`, `알려드립니다`, `감사합니다`, and `확인해 보세요`
-
-Use:
-
-- Prefer established Korean translations or transliterations for technical terms; otherwise keep the original term.
-- Write ordinary Sino-Korean words in Hangul; retain the spelling of proper names and technical identifiers.
+- Empty introductory phrases, such as `사실`, `그냥`, and `기본적으로`, when the sentence conveys the same meaning without them.
+- Response announcements, such as `설명해 드리겠습니다` and `알려드립니다`, when the explanation itself is sufficient.
