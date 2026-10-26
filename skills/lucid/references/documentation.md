@@ -1,7 +1,5 @@
 # Documentation
 
-Apply this guidance to technical documents, design documents, and work logs.
-
 ## Write for the intended readers
 
 - Supply the context readers need without relying on the editing conversation. Introduce relevant systems, terms, and constraints where they become necessary.
