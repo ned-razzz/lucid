@@ -29,11 +29,6 @@ Accept an optional level argument: `general`, `basic`, or `pro`. Default to `bas
 3. **Make abstract expressions concrete.** Replace abstract nouns and sequences of nouns with sentences that show actual actions and situations.
 4. **Make logical connections explicit.** Supply omitted explanations between causes, processes, and results as needed.
 
-### Example
-
-- Before: "Without cache invalidation, users may see outdated data."
-- After: "When the original data changes, the cached copy must be updated or removed. Otherwise, the old copy remains in the cache, and users who read it may see outdated data."
-
 ## Edit for clarity
 
 - Find places where readers would need to guess a term's meaning, infer a missing step, or look back to recover context. Rewrite those places using familiar words, an explicit connection, or a concrete example.
@@ -54,6 +49,22 @@ Accept an optional level argument: `general`, `basic`, or `pro`. Default to `bas
 - Common expressions to remove include:
     - Empty introductory phrases, such as `사실`, `그냥`, and `기본적으로`, when the sentence conveys the same meaning without them.
     - Response announcements, such as `설명해 드리겠습니다` and `알려드립니다`, when the explanation itself is sufficient.
+
+## Examples by level
+
+Question: "How do we avoid showing old product prices after a price change?"
+
+### L1: `general`
+
+A cache stores a copy of data so it can be retrieved quickly. When a product's price changes, update or remove the saved copy. Otherwise, shoppers may still see the old price.
+
+### L2: `basic`
+
+When a product's price changes, update or invalidate its cached price. Invalidation removes the saved value so the next request can fetch the current price.
+
+### L3: `pro`
+
+Refresh or invalidate the price cache on writes. A TTL alone allows stale reads until expiry, so choose it only if that delay is acceptable.
 
 ## References
 
