@@ -10,7 +10,17 @@ description: >
 
 - Minimize the effort readers need to understand the content.
 - Preserve substantive information and precision while unpacking expressions and reasoning that make readers reconstruct the meaning themselves.
-- Choose sentence length and explanation depth by what readers need to follow the content.
+- Adjust explanation depth to the selected level and apply the readability principles at every level.
+
+## Explanation level
+
+Accept an optional level argument: `general`, `basic`, or `pro`. Default to `basic` when no level is specified.
+
+| Level | Argument | Intended readers | Explanation approach |
+| --- | --- | --- | --- |
+| L1 | `general` | General readers with little or no knowledge of the field | Introduce necessary background, explain terms, and use concrete examples. |
+| L2 | `basic` | Readers with basic concepts and background knowledge of the field | Build on that foundation and explain unfamiliar concepts and reasoning. |
+| L3 | `pro` | Mid-level practitioners with specialized knowledge and practical experience | Use domain terminology and focus on practical decisions, technical details, tradeoffs, and implications. |
 
 ## Principles for readability
 
