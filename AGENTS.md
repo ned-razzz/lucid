@@ -5,7 +5,7 @@ This repository contains Lucid, an Agent Skill for compatible coding agents. It 
 ## Project principles
 
 - Prioritize readability, intuitive explanations, and low reading difficulty while preserving accuracy.
-- Adjust explanation depth to the task's purpose and intended readers' knowledge. For answers, use the user's demonstrated understanding in the prompt and relevant context. Briefly explain necessary concepts when familiarity is unclear.
+- Adjust explanation depth to the selected level: `general`, `basic`, or `pro`. Default to `basic` when no level is specified.
 - Preserve the context and details readers need; remove expressions only when they add no information, meaningful nuance, or connection between ideas.
 - Keep skill instructions independent of agent-specific commands, paths, and persistent modes.
 - Keep the standard Agent Skills structure and remove files or code the skill does not need.
