@@ -4,7 +4,7 @@
 
 <h1 align="center">Lucid</h1>
 
-<p align="center">Agent Skills · 쉽고 명확하게 읽히는 응답과 문서</p>
+<p align="center">Agent Skills · Clear answers and documentation</p>
 
 <p align="center">
   <a href="https://github.com/ned-razzz/Lucid/stargazers"><img src="https://img.shields.io/github/stars/ned-razzz/Lucid?style=flat&color=yellow" alt="GitHub stars" /></a>
@@ -13,99 +13,86 @@
 
 ---
 
-# Overview
+Lucid is an Agent Skill that makes Korean and English answers and documentation
+easier to read and understand. It explains unfamiliar terms, fills gaps in reasoning,
+and removes unnecessary repetition while preserving accuracy and the details readers need.
 
-Lucid는 한국어·영어 응답과 독자를 위한 문서를 쉽게 읽고 이해하도록 돕는 Agent Skill이다. 독자가 내용을 이해하는 데 드는 노력을 줄이는 것이 목표다. 익숙한 표현과 필요한 배경 설명으로 개념과 논리를 풀어 쓰고, 의미를 더하지 않는 표현을 덜어낸다. 기술 문서, 설계 문서, 작업 기록에도 적용한다.
+Use it to explain technical concepts, summarize analysis, or write technical documents,
+design documents, and work logs. It works with coding agents that support the standard
+Agent Skills format.
 
-표준 Agent Skills 형식으로 작성하여 이를 지원하는 코딩 에이전트에서 사용할 수 있다.
+## Installation
 
-Lucid는 [`scrooge-mode`](https://github.com/Kir93/scrooge-mode)를 기반으로 만들었으며, 한국어 출력 규칙은 [`fluent-korean`](https://github.com/snflkd/fluent-korean)의 언어 원칙을 참고해 보완했다.
+Copy the entire `skills/lucid` directory into your agent's skills directory.
+Check your agent's documentation for the supported location. Common locations include:
 
-# Why Use?
+- For one project: `.agents/skills/lucid`
+- For use across projects: `~/.agents/skills/lucid`
 
-AI agent가 정보를 빠르게 생성할수록, 그 내용을 읽고 이해하고 검토하는 일이 더 중요해진다.
+On Windows, run this command from the repository root to install into
+`~/.agents/skills/lucid`:
 
-Lucid는 독자가 용어의 뜻이나 빠진 논리를 추측하고, 맥락을 되찾으려고 앞부분을 다시 읽어야 하는 지점을 줄이는 데 집중한다.
+```powershell
+./scripts/install-lucid-skill.ps1
+```
 
-Lucid는 에이전트의 응답과 문서에 다음 원칙을 적용한다.
+## Usage
 
-- 선택한 수준(`general`, `basic`, `pro`)에 맞춰 설명의 깊이를 조정한다. 수준을 지정하지 않으면 `basic`을 적용한다.
-- 낯선 개념은 익숙한 개념과 구체적인 동작·관계로 설명한다. 추상적인 설명만으로 이해하기 어려우면 예시를 사용한다.
-- 독자의 관점에서 이해가 끊기는 지점을 검토한다. 필요한 연결을 명시하고, 정보·뉘앙스·논리 연결에 기여하지 않는 표현을 덜어낸다.
+Your agent uses the skill description to decide when to apply Lucid.
+Once Lucid is installed, use the explicit skill syntax supported by your agent:
+`/lucid` or `$lucid`. For example:
 
-분량을 줄이더라도 이해에 필요한 맥락과 세부 정보는 유지한다.
+```text
+/lucid Explain what caused this error and how to fix it.
+```
+```text
+$lucid core Summarize this design and the reasons behind its choices.
+```
 
-# Mechanism
+Choose an explanation level below. The default is `flow`.
+Every level aims for easy reading; the level controls how fully Lucid explains
+the reasoning and process.
 
-Agent Skills 호환 에이전트는 `SKILL.md`의 이름과 설명을 읽고 작업에 맞는
-스킬을 선택한다. Lucid가 선택되면 `SKILL.md`의 공통 설명 원칙을 적용하고,
-한국어·영어 표현 지침도 `SKILL.md`에서 확인한다. 문서를 작성하거나 수정할 때는
-`references/documentation.md`의 독자·문서 목적별 지침도 적용한다. 호출 방법과 스킬 설치
-경로는 사용하는 에이전트에 따라 달라진다.
+| Level | Scope |
+| --- | --- |
+| `core` | Give the main answer and its essential reason concisely. |
+| `flow` (default) | Lead with the answer, then connect the reasons and context needed to understand it. |
+| `steps` | Start with an overview, then explain relevant intermediate steps and examples. |
 
-## How responses become clearer
+See the [skill instructions](skills/lucid/SKILL.md) for explanation and language principles,
+and the [documentation guide](skills/lucid/references/documentation.md) for guidance
+on writing for a document's readers and purpose.
 
-선택한 수준에 맞춰 필요한 배경과 용어를 설명한다.
-원인·조건·시간 순서·대조 관계를 명시해 독자가 설명 사이의
-연결을 추측하지 않아도 되도록 한다.
+## Benchmark
 
-독자의 관점에서 용어의 뜻을 추측하거나 빠진 단계를 스스로 채워야 하는 부분을
-찾는다. 이런 부분은 익숙한 표현, 명시적인 연결, 구체적인 예시로 고친다.
-반복 설명은 필요한 차이를 드러낼 때 유지한다.
+The [ROS 2 QoS question](evals/questions/02-ros2-qos.md) asks why a subscriber
+receives no camera images when the publisher uses `BEST_EFFORT` and the subscriber
+uses `RELIABLE`. The other QoS settings are compatible.
 
-## Preserve meaning and accuracy
+The table shows all three answers from the same evaluation run, in the original Korean.
 
-쉽게 설명하더라도 판단에 필요한 정보와 정확성은 유지한다.
+> **Note — One-sentence prompt:** 한국어로 쉽고 자세하고 간결하게 설명해. 독자를 기본적인 개발 지식은 있지만 특정 기술이나 프로젝트의 내부 맥락까지 모두 알고 있지는 않은 주니어 개발자로 상정하고 답변해.
 
-- 원인·조건·시간 순서·대조 관계
-- 부정의 범위, 숫자, 단위, 범위, 수량 한정
-- 검증 상태와 실제 불확실성·확률·신뢰도
+| Condition | Answer |
+| --- | --- |
+| Baseline | 발행자의 `BEST_EFFORT`는 메시지 전달을 보장하지 않지만, 구독자의 `RELIABLE`은 전달 보장을 요구합니다. 따라서 두 reliability 정책이 호환되지 않아 구독이 연결되지 않습니다.<br><br>구독자의 reliability를 `BEST_EFFORT`로 바꾸면 발행자와 호환되어 메시지를 받을 수 있습니다. `BEST_EFFORT` 구독자는 `RELIABLE` 발행자도 받을 수 있으므로, 유연성을 원한다면 구독자 QoS를 `BEST_EFFORT`로 설정하면 됩니다. |
+| Lucid (`flow`) | 구독자가 `RELIABLE`을 요구하지만 발행자는 `BEST_EFFORT`만 제공하므로 QoS가 호환되지 않는다. 따라서 구독자는 발행자의 메시지를 받지 못한다.<br><br>구독자의 reliability를 `BEST_EFFORT`로 바꾸면 된다. `BEST_EFFORT` 구독자는 `BEST_EFFORT`와 `RELIABLE` 발행자 모두와 호환된다. 반면 `RELIABLE` 구독자는 `RELIABLE` 발행자와만 호환된다. |
+| One-sentence prompt | ROS 2에서는 토픽 이름과 메시지 타입이 같아도 **QoS가 서로 호환되지 않으면** 메시지를 주고받지 못할 수 있습니다.<br><br>`RELIABLE` 구독자는 메시지 전달을 보장하는 연결을 요구하지만, `BEST_EFFORT` 발행자는 전달을 보장하지 않습니다. 따라서 이 조합은 호환되지 않아 구독자가 영상을 받지 못합니다.<br><br>구독자의 reliability를 `BEST_EFFORT`로 바꾸면 됩니다. 그러면 발행자의 `BEST_EFFORT`와 호환되어 메시지를 받을 수 있습니다. `BEST_EFFORT` 구독자는 `RELIABLE` 발행자와도 호환되므로, 구독자 쪽을 `BEST_EFFORT`로 설정하는 것이 흔히 쓰이는 해결 방법입니다. |
 
-원문, 코드, 기술 식별자를 인용하거나 재현할 때는 정확히 보존한다.
-확인되지 않은 추측은 사실처럼 단정하지 않고, 실제 불확실성과 검증 상태를 유지한다.
+Generate answers to the same questions under three conditions: a baseline,
+Lucid, and a one-sentence prompt. Compare the answers yourself; there is no automatic scoring.
+Python 3.11 or later and a signed-in Codex CLI are required.
 
-## Reader-facing documentation
-
-문서는 편집 대화를 보지 않은 독자도 이해할 수 있도록 필요한 맥락을 제공하고,
-문서의 목적과 범위, 요청된 문체를 따른다. 기존 문서를 수정할 때는 문체·용어·형식을
-보존한다. 편집 과정에 관한 설명은 요청된 경우를 제외하고 함께 전달하는 응답에서
-다룬다. 참고 자료는 독자가 주장을 확인하거나 내용을 이해하고 활용하는 데 필요할 때
-추가한다.
-
-## Korean register
-
-한국어는 “확인했다”, “적용한다”, “문제가 없다”처럼 짧고 완결된 한다체를 기본으로 쓴다.
-
-누가 행동하는지 또는 문장이 무엇을 가리키는지 혼동할 수 있으면 주어를 명시한다.
-조사는 생략해도 행위자·대상·방향·수단·대조 관계가 분명할 때만 덜어낸다.
-
-표현은 문맥에서 하는 역할을 보고 판단한다. 예를 들어 “기본적으로”를 빼도 뜻이
-같다면 덜어내고, 설명 자체로 충분하면 “설명해 드리겠습니다” 같은 예고를 생략한다.
-정도나 불확실성을 나타내는 표현은 그 의미를 보존한다.
-
-# Evaluation
-
-저장소 루트에서 다음 명령을 실행하면 `evals/questions/`의 질문을 모두 처리한다.
+Run from the repository root:
 
 ```powershell
 python -X utf8 evals/benchmark.py
 ```
 
-기본 응답·Lucid·한 문장 프롬프트의 답변을 생성해 직접 비교한다. 자동 채점은 하지 않는다.
-독자가 용어를 추측하거나 설명을 다시 읽어야 하는지, 개념과 논리를 쉽게 따라갈 수 있는지를
-중심으로 평가한다. 실행 조건과 결과 경로는 [평가 안내](evals/README.md)를 참고한다.
+## Credits and license
 
-# Installation
+Lucid is based on [`scrooge-mode`](https://github.com/Kir93/scrooge-mode).
+Its Korean language guidance also draws on the principles in
+[`fluent-korean`](https://github.com/snflkd/fluent-korean).
 
-`skills/lucid` 디렉터리 전체를 사용하는 에이전트의 스킬 디렉터리에 복사한다.
-많은 에이전트가 프로젝트의 `.agents/skills/lucid` 또는 사용자 홈의
-`~/.agents/skills/lucid`를 인식하지만, 실제 검색 경로와 설치 방법은 에이전트
-문서를 확인한다.
-
-# How to Use
-
-복잡한 정보, 분석 결과, 기술 개념을 설명하거나 정리해 달라고 요청하면 에이전트가
-Lucid의 설명을 보고 관련성을 판단한다. 기술 문서, 설계 문서, 작업 기록을 작성하거나
-수정하는 요청에도 적용한다. 명시적으로 사용하고 싶다면 사용하는
-에이전트의 스킬 선택 방법을 따른다. 한국어 또는 영어로 답해 달라고 요청하면
-해당 언어의 규칙을 적용한다.
+Released under the [MIT license](LICENSE).
